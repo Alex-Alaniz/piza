@@ -84,7 +84,7 @@ export default function Home() {
       <div className="blob" id="cursor-blob"></div>
 
       <nav>
-        <div className="logo">PIZA.GLOBAL</div>
+        <div className="logo">PIZA</div>
         <ul className="nav-links">
           <li>
             <a href="#work">Portfolio</a>
@@ -102,17 +102,17 @@ export default function Home() {
         {/* HERO SECTION */}
         <section id="hero">
           <img
-            src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1200"
-            alt="Digital Entrepreneur"
+            src="https://deadline.com/wp-content/uploads/2026/02/Stephanie-Piza.jpg"
+            alt="Stephanie Piza - Founder"
             className="hero-img"
             id="hero-img"
           />
           <div className="hero-title-container container">
             <span className="huge-type parallax-text" data-speed="-2">
-              SCALE
+              REPRESENTATION
             </span>
             <span className="huge-type outline-text parallax-text" data-speed="2" style={{ paddingLeft: "200px" }}>
-              GLOBAL
+              2.0
             </span>
           </div>
         </section>
@@ -120,7 +120,7 @@ export default function Home() {
         {/* INTRO */}
         <section id="about">
           <div className="container">
-            <div style={{ maxWidth: "800px" }}>
+            <div style={{ maxWidth: "900px" }}>
               <h2
                 style={{
                   fontSize: "3rem",
@@ -128,16 +128,26 @@ export default function Home() {
                   marginBottom: "40px",
                 }}
               >
-                WE MANAGE DIGITAL-FIRST ENTREPRENEURS WHO MOVE THE WORLD.
+                CREATORS ARE MEDIA COMPANIES WITH BUILT-IN DISTRIBUTION. THE QUESTION IS WHETHER THEY&apos;LL OWN WHAT THEY BUILD.
               </h2>
               <p
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 300,
                   color: "#888",
+                  marginBottom: "40px",
                 }}
               >
-                Strategic partnerships. Global reach. We operate at the intersection of talent management and digital innovation, helping creators and entrepreneurs scale their vision worldwide.
+                Founded by Stephanie Piza in 2026, PIZA is a management company repping a curated roster of digital-first entrepreneurs while expanding into venture incubation and brand co-builds.
+              </p>
+              <p
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: 300,
+                  color: "#666",
+                }}
+              >
+                Creators are no longer talent — they are enterprises unto themselves. Our focus: equity participation, IP retention, creator-led product incubation, and cultural positioning that compounds over time.
               </p>
             </div>
           </div>
@@ -151,59 +161,60 @@ export default function Home() {
           </div>
         </div>
 
-        {/* WORK SECTION */}
+        {/* FOUNDER SECTION */}
         <section id="work" className="container">
-          <div className="sticky-type">ROSTER</div>
+          <div className="sticky-type">FOUNDER</div>
 
-          {/* Project 1 */}
+          {/* Stephanie Piza */}
           <div className="project-row">
             <div className="project-info">
-              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>001 / TECH CREATOR</span>
-              <h3 className="huge-type" style={{ fontSize: "6rem", margin: "20px 0" }}>
-                LUNA
+              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>STEPHANIE PIZA</span>
+              <h3 className="huge-type" style={{ fontSize: "5rem", margin: "20px 0" }}>
+                VISIONARY
               </h3>
               <p>
-                Tech educator and SaaS founder with 2M+ followers. We scaled her brand partnerships and launched her digital course platform globally.
+                Former Head of Emerging & Interactive Talent at M88, where she structured six-figure global brand partnerships and repositioned creator clients as long-term business assets.
               </p>
               <div className="divider"></div>
-              <p>SINCE: 2024</p>
+              <p style={{ marginBottom: "20px" }}>Previously launched UNCMMN alongside Charles D. King and Macro — one of the first female-founded management firms centered on culturally influential digital voices, later acquired by M88.</p>
+              <p>Career began at CAA in digital talent and brand partnerships, followed by roles at Big Frame and Flip Management.</p>
             </div>
             <div className="project-media">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000"
-                alt="Luna - Tech Creator"
+                src="https://deadline.com/wp-content/uploads/2026/02/Stephanie-Piza.jpg"
+                alt="Stephanie Piza - Founder"
                 className="project-image"
               />
               <div className="floating-label huge-type outline-text" style={{ fontSize: "8rem" }}>
-                SCALE
+                PIZA
               </div>
             </div>
           </div>
 
-          {/* Project 2 */}
+          {/* Track Record */}
           <div className="project-row" style={{ flexDirection: "row-reverse" }}>
             <div className="project-info">
-              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>002 / ENTREPRENEUR</span>
-              <h3 className="huge-type" style={{ fontSize: "6rem", margin: "20px 0" }}>
-                APEX
+              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>TRACK RECORD</span>
+              <h3 className="huge-type" style={{ fontSize: "5rem", margin: "20px 0" }}>
+                LEGACY
               </h3>
               <p>
-                Serial entrepreneur and Web3 innovator. We manage his speaking engagements, media relations, and venture partnerships across 15 countries.
+                Built 360-degree businesses for digitally native talent including celebrity chef Eitan Bernath, TikTok phenom Taylor Cassidy, JC Caylen, Joanne the Scammer, and Buzzfeed creator Freddie Ransome.
               </p>
               <div className="divider"></div>
-              <p>SINCE: 2023</p>
+              <p>Recognized as a premier dealmaker in the digital space. University of Central Florida — B.A. in Public Relations, Advertising, and Applied Communication.</p>
             </div>
             <div className="project-media">
               <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1000"
-                alt="Apex - Entrepreneur"
+                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1000"
+                alt="Digital Innovation"
                 className="project-image"
               />
               <div
                 className="floating-label huge-type outline-text"
                 style={{ fontSize: "8rem", right: "auto", left: "-100px" }}
               >
-                GLOBAL
+                BUILT
               </div>
             </div>
           </div>
@@ -275,13 +286,13 @@ export default function Home() {
                 color: "#555",
               }}
             >
-              <div>© 2026 PIZA.GLOBAL</div>
+              <div>© 2026 PIZA</div>
               <div style={{ display: "flex", gap: "30px" }}>
                 <span>LINKEDIN</span>
                 <span>TWITTER/X</span>
                 <span>INSTAGRAM</span>
               </div>
-              <div>LOS ANGELES // LONDON // DUBAI</div>
+              <div>LOS ANGELES</div>
             </div>
           </div>
         </footer>

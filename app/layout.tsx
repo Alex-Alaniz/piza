@@ -8,8 +8,8 @@ const syne = Syne({ subsets: ["latin"], variable: "--font-syne" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
-  title: "Piza.Global | Management for Digital-First Entrepreneurs",
-  description: "Empowering digital-first entrepreneurs to scale their vision globally",
+  title: "PIZA | Representation 2.0 for Digital-First Entrepreneurs",
+  description: "Founded by Stephanie Piza in 2026. Management company for digital-first entrepreneurs. Venture incubation. Brand co-builds. Los Angeles.",
   generator: "v0.app",
   icons: {
     icon: [
