@@ -206,8 +206,8 @@ export default function Home() {
             </div>
             <div className="project-media">
               <img
-                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1000"
-                alt="Digital Innovation"
+                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=1000"
+                alt="Creator economy deals"
                 className="project-image"
               />
               <div
@@ -225,28 +225,29 @@ export default function Home() {
           <div className="container composition">
             <div className="comp-item-1">
               <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600"
+                src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=600"
                 className="comp-image"
-                alt="Team collaboration"
+                alt="Brand deal signing"
               />
             </div>
             <div className="comp-item-2">
               <img
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800"
                 className="comp-image"
-                alt="Digital workspace"
+                alt="Content creation setup"
               />
             </div>
             <div className="comp-item-3">
               <div
                 style={{
-                  background: "var(--accent)",
+                  background: "#0e0e0e",
                   padding: "40px",
-                  color: "white",
+                  color: "#ffffff",
+                  border: "1px solid #ff3e00",
                 }}
               >
-                <h4 style={{ fontFamily: "var(--syne)", fontSize: "2rem" }}>FULL-SERVICE MANAGEMENT</h4>
-                <p style={{ marginTop: "20px" }}>
+                <h4 style={{ fontFamily: "var(--syne)", fontSize: "2rem", color: "#ff3e00" }}>FULL-SERVICE MANAGEMENT</h4>
+                <p style={{ marginTop: "20px", color: "#cccccc", lineHeight: "1.6" }}>
                   Brand strategy. Deal negotiation. Media relations. Content monetization. We handle the business so our talent can focus on creating impact.
                 </p>
               </div>
@@ -261,9 +262,9 @@ export default function Home() {
               }}
             >
               <img
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=500"
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=500"
                 className="comp-image"
-                alt="Strategy meeting"
+                alt="Business negotiation"
               />
             </div>
           </div>
