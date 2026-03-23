@@ -8,8 +8,8 @@ const syne = Syne({ subsets: ["latin"], variable: "--font-syne" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
-  title: "VISCERA STUDIO",
-  description: "Digital artifacts that shatter the noise",
+  title: "Piza.Global | Management for Digital-First Entrepreneurs",
+  description: "Empowering digital-first entrepreneurs to scale their vision globally",
   generator: "v0.app",
   icons: {
     icon: [

@@ -84,13 +84,13 @@ export default function Home() {
       <div className="blob" id="cursor-blob"></div>
 
       <nav>
-        <div className="logo">VISCERA ©26</div>
+        <div className="logo">PIZA.GLOBAL</div>
         <ul className="nav-links">
           <li>
-            <a href="#work">Work</a>
+            <a href="#work">Portfolio</a>
           </li>
           <li>
-            <a href="#about">Studio</a>
+            <a href="#about">About</a>
           </li>
           <li>
             <a href="#contact">Contact</a>
@@ -102,17 +102,17 @@ export default function Home() {
         {/* HERO SECTION */}
         <section id="hero">
           <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200"
-            alt="Editorial"
+            src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1200"
+            alt="Digital Entrepreneur"
             className="hero-img"
             id="hero-img"
           />
           <div className="hero-title-container container">
             <span className="huge-type parallax-text" data-speed="-2">
-              VISION
+              SCALE
             </span>
             <span className="huge-type outline-text parallax-text" data-speed="2" style={{ paddingLeft: "200px" }}>
-              SYSTEMS
+              GLOBAL
             </span>
           </div>
         </section>
@@ -128,7 +128,7 @@ export default function Home() {
                   marginBottom: "40px",
                 }}
               >
-                WE BUILD DIGITAL ARTIFACTS THAT SHATTER THE NOISE.
+                WE MANAGE DIGITAL-FIRST ENTREPRENEURS WHO MOVE THE WORLD.
               </h2>
               <p
                 style={{
@@ -137,8 +137,7 @@ export default function Home() {
                   color: "#888",
                 }}
               >
-                Visceral aesthetic. Technical precision. We operate at the intersection of high-fashion editorial and
-                brutalist digital architecture.
+                Strategic partnerships. Global reach. We operate at the intersection of talent management and digital innovation, helping creators and entrepreneurs scale their vision worldwide.
               </p>
             </div>
           </div>
@@ -147,36 +146,36 @@ export default function Home() {
         {/* MARQUEE */}
         <div className="scrolling-marquee">
           <div className="marquee-inner">
-            <span className="huge-type outline-text">NEW ERA — NEW ORDER — VISCERA — BEYOND FORM — </span>
-            <span className="huge-type outline-text">NEW ERA — NEW ORDER — VISCERA — BEYOND FORM — </span>
+            <span className="huge-type outline-text">DIGITAL FIRST — GLOBAL REACH — PIZA — SCALE BEYOND — </span>
+            <span className="huge-type outline-text">DIGITAL FIRST — GLOBAL REACH — PIZA — SCALE BEYOND — </span>
           </div>
         </div>
 
         {/* WORK SECTION */}
         <section id="work" className="container">
-          <div className="sticky-type">ARCHIVE</div>
+          <div className="sticky-type">ROSTER</div>
 
           {/* Project 1 */}
           <div className="project-row">
             <div className="project-info">
-              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>001 / FASHION</span>
+              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>001 / TECH CREATOR</span>
               <h3 className="huge-type" style={{ fontSize: "6rem", margin: "20px 0" }}>
-                NOIR
+                LUNA
               </h3>
               <p>
-                A deep-dive into monochromatic textures and high-contrast digital layouts for a Parisian couture house.
+                Tech educator and SaaS founder with 2M+ followers. We scaled her brand partnerships and launched her digital course platform globally.
               </p>
               <div className="divider"></div>
-              <p>YEAR: 2024</p>
+              <p>SINCE: 2024</p>
             </div>
             <div className="project-media">
               <img
-                src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1000"
-                alt="Noir Project"
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000"
+                alt="Luna - Tech Creator"
                 className="project-image"
               />
               <div className="floating-label huge-type outline-text" style={{ fontSize: "8rem" }}>
-                SHADOW
+                SCALE
               </div>
             </div>
           </div>
@@ -184,27 +183,27 @@ export default function Home() {
           {/* Project 2 */}
           <div className="project-row" style={{ flexDirection: "row-reverse" }}>
             <div className="project-info">
-              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>002 / ARCHITECTURE</span>
+              <span style={{ fontFamily: "var(--syne)", color: "var(--accent)" }}>002 / ENTREPRENEUR</span>
               <h3 className="huge-type" style={{ fontSize: "6rem", margin: "20px 0" }}>
-                BRUTE
+                APEX
               </h3>
               <p>
-                Conceptual web experience for a structural engineering firm focused on monolithic concrete structures.
+                Serial entrepreneur and Web3 innovator. We manage his speaking engagements, media relations, and venture partnerships across 15 countries.
               </p>
               <div className="divider"></div>
-              <p>YEAR: 2023</p>
+              <p>SINCE: 2023</p>
             </div>
             <div className="project-media">
               <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000"
-                alt="Brute Project"
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1000"
+                alt="Apex - Entrepreneur"
                 className="project-image"
               />
               <div
                 className="floating-label huge-type outline-text"
                 style={{ fontSize: "8rem", right: "auto", left: "-100px" }}
               >
-                CONCRETE
+                GLOBAL
               </div>
             </div>
           </div>
@@ -215,16 +214,16 @@ export default function Home() {
           <div className="container composition">
             <div className="comp-item-1">
               <img
-                src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=600"
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600"
                 className="comp-image"
-                alt="Layer 1"
+                alt="Team collaboration"
               />
             </div>
             <div className="comp-item-2">
               <img
-                src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800"
                 className="comp-image"
-                alt="Layer 2"
+                alt="Digital workspace"
               />
             </div>
             <div className="comp-item-3">
@@ -235,10 +234,9 @@ export default function Home() {
                   color: "white",
                 }}
               >
-                <h4 style={{ fontFamily: "var(--syne)", fontSize: "2rem" }}>LAYERED DEPTH</h4>
+                <h4 style={{ fontFamily: "var(--syne)", fontSize: "2rem" }}>FULL-SERVICE MANAGEMENT</h4>
                 <p style={{ marginTop: "20px" }}>
-                  We believe in depth—both in meaning and in visual manifestation. Overlapping elements create a
-                  zine-like chaos that is meticulously organized.
+                  Brand strategy. Deal negotiation. Media relations. Content monetization. We handle the business so our talent can focus on creating impact.
                 </p>
               </div>
             </div>
@@ -252,9 +250,9 @@ export default function Home() {
               }}
             >
               <img
-                src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=500"
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=500"
                 className="comp-image"
-                alt="Layer 3"
+                alt="Strategy meeting"
               />
             </div>
           </div>
@@ -264,7 +262,7 @@ export default function Home() {
         <footer id="contact">
           <div className="container">
             <div className="footer-cta">
-              <a href="mailto:hello@viscera.studio">LET&apos;S — WORK</a>
+              <a href="mailto:hello@piza.global">LET&apos;S — CONNECT</a>
             </div>
             <div className="divider"></div>
             <div
@@ -277,13 +275,13 @@ export default function Home() {
                 color: "#555",
               }}
             >
-              <div>© 2026 VISCERA STUDIO</div>
+              <div>© 2026 PIZA.GLOBAL</div>
               <div style={{ display: "flex", gap: "30px" }}>
-                <span>INSTAGRAM</span>
+                <span>LINKEDIN</span>
                 <span>TWITTER/X</span>
-                <span>BEHANCE</span>
+                <span>INSTAGRAM</span>
               </div>
-              <div>LOCATED IN BERLIN // TOKYO</div>
+              <div>LOS ANGELES // LONDON // DUBAI</div>
             </div>
           </div>
         </footer>
