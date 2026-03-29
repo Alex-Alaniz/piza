@@ -35,7 +35,6 @@ export default function PitchPage() {
         <Proof />
         <Roadmap />
         <Closing />
-        <Footer />
       </div>
     </SmoothScroll>
   )
@@ -103,7 +102,7 @@ function Hero() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center snap-start snap-always px-6 md:px-12 md:pl-28 overflow-hidden">
+    <section ref={sectionRef} id="hero" className="relative h-screen overflow-y-auto flex items-center snap-start snap-always px-6 md:px-12 md:pl-28">
       <NoiseOverlay opacity={0.03} />
 
       {/* Vertical label */}
@@ -553,25 +552,19 @@ function Closing() {
             <a href="https://pitch.bearified.co" className="text-[oklch(0.95_0_0)]/30 font-mono text-xs hover:text-[oklch(0.7_0.2_45)] transition-colors">pitch.bearified.co</a>
           </div>
         </div>
+        {/* Footer integrated into closing slide */}
+        <footer className="absolute bottom-0 left-0 right-0 border-t border-[oklch(0.25_0_0)] py-8 px-6 md:px-12">
+          <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-3 text-[oklch(0.95_0_0)]/20">
+              <span className="font-display tracking-[0.1em] text-sm">PIZA.GLOBAL</span>
+              <span className="font-mono text-[10px]">x</span>
+              <span className="font-display tracking-[0.1em] text-sm">BEARIFIED</span>
+            </div>
+            <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/15 uppercase">Own Your Platform | Confidential 2026</p>
+          </div>
+        </footer>
       </div>
     </AnimatedSection>
-  )
-}
-
-/* ─── FOOTER ───────────────────────────────────────────── */
-
-function Footer() {
-  return (
-    <footer className="border-t border-[oklch(0.25_0_0)] py-8 px-6 md:px-12 snap-start">
-      <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div className="flex items-center gap-3 text-[oklch(0.95_0_0)]/20">
-          <span className="font-display tracking-[0.1em] text-sm">PIZA.GLOBAL</span>
-          <span className="font-mono text-[10px]">x</span>
-          <span className="font-display tracking-[0.1em] text-sm">BEARIFIED</span>
-        </div>
-        <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/15 uppercase">Own Your Platform | Confidential 2026</p>
-      </div>
-    </footer>
   )
 }
 

@@ -72,7 +72,7 @@ export default function AnimatedSection({
   return (
     <section
       ref={ref}
-      className={`relative min-h-screen flex items-center snap-start snap-always ${className}`}
+      className={`relative h-screen overflow-y-auto flex items-center snap-start snap-always ${className}`}
       id={id}
     >
       {children}
