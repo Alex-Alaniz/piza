@@ -16,8 +16,6 @@ export default function PitchPage() {
 
       {/* Slide navigation dots */}
       <SlideDots />
-      <ProgressBar />
-      <SlideCounter />
 
       <NoiseOverlay />
 
@@ -89,65 +87,6 @@ function SlideDots() {
         )
       })}
     </nav>
-  )
-}
-
-/* ─── SLIDE COUNTER ───────────────────────────────────── */
-
-function SlideCounter() {
-  const [activeSection, setActiveSection] = useState<string>("hero")
-
-  useEffect(() => {
-    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[]
-    if (elements.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
-        }
-      },
-      { threshold: 0.3 }
-    )
-
-    for (const el of elements) {
-      observer.observe(el)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  const currentIndex = SECTION_IDS.indexOf(activeSection as typeof SECTION_IDS[number]) + 1
-
-  return (
-    <div className="fixed bottom-6 right-6 z-50 hidden md:block font-mono text-[10px] tracking-[0.3em] text-[oklch(0.95_0_0)]/20">
-      <span className="text-[oklch(0.7_0.2_45)]">{String(currentIndex).padStart(2, "0")}</span>
-      <span> / {String(SECTION_IDS.length).padStart(2, "0")}</span>
-    </div>
-  )
-}
-
-/* ─── PROGRESS BAR ────────────────────────────────────── */
-
-function ProgressBar() {
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollTop = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      setProgress(docHeight > 0 ? scrollTop / docHeight : 0)
-    }
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
-
-  return (
-    <div className="fixed top-0 left-0 w-full h-[2px] z-[60]">
-      <div className="h-full bg-[oklch(0.7_0.2_45)]" style={{ width: `${progress * 100}%`, transition: "width 0.1s linear" }} />
-    </div>
   )
 }
 
@@ -239,18 +178,18 @@ function Hero() {
 
 function Problem() {
   return (
-    <AnimatedSection id="problem" animation="fade-up" className="px-6 md:px-12 md:pl-28">
+    <AnimatedSection id="problem" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>01 / The Problem</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] mb-12">
-          THE CEILING — <span className="text-[oklch(0.95_0_0)]/25">20M FOLLOWERS.</span> ZERO CONTROL.
+        <h2 data-animate className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] mb-10">
+          THE CEILING. <span className="text-[oklch(0.95_0_0)]/25">20M FOLLOWERS.</span> ZERO CONTROL.
         </h2>
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div data-animate>
             <p className="text-[oklch(0.95_0_0)]/50 text-base md:text-lg leading-relaxed mb-10">
               Matt Rife built an empire on TikTok. Then the algorithm stopped pushing stand-up comedy.
-              20 million followers — and he couldn&apos;t reach them.
+              20 million followers. And he couldn&apos;t reach them.
             </p>
             <blockquote className="border-l-2 border-[oklch(0.7_0.2_45)] pl-6 mb-8">
               <p className="text-lg italic text-[oklch(0.95_0_0)]/80 leading-snug">
@@ -280,7 +219,7 @@ function Problem() {
 
 function Shift() {
   return (
-    <AnimatedSection id="shift" animation="slide-left" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
+    <AnimatedSection id="shift" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>02 / The Shift</SectionLabel>
@@ -289,7 +228,7 @@ function Shift() {
           OF <span className="text-[oklch(0.7_0.2_45)]">BUILDING SOFTWARE.</span>
         </h2>
         <div className="grid md:grid-cols-2" data-animate>
-          <div className="border border-[oklch(0.25_0_0)] p-8 md:p-12 bg-[oklch(0.12_0_0)]">
+          <div className="border border-[oklch(0.25_0_0)] p-8 md:p-12 bg-[oklch(0.1_0_0)]">
             <span className="font-display text-xl text-[oklch(0.95_0_0)]/30 mb-8 block">Before</span>
             <div className="space-y-5">
               {["50-person engineering team","$500K+ annual burn rate","18-month development cycles","Millions in VC funding"].map((item) => (
@@ -321,14 +260,14 @@ function Shift() {
 
 function Product() {
   return (
-    <AnimatedSection id="product" animation="scale" className="px-6 md:px-12 md:pl-28">
+    <AnimatedSection id="product" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>03 / The Product</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
           THE CREATOR <span className="text-[oklch(0.7_0.2_45)]">PLATFORM</span>
         </h2>
-        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-12 max-w-lg">
+        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-16 max-w-lg">
           Tailored to their medium. Branded to their identity. Owned by the creator.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4" data-animate>
@@ -336,9 +275,9 @@ function Product() {
             { n: "01", title: "Podcast App", desc: "Audio-first experience. Episodes, playlists, exclusive drops." },
             { n: "02", title: "Video App", desc: "Creator-branded streaming platform. Owned library." },
             { n: "03", title: "Publishing", desc: "Blog, newsletter, premium articles. Direct to fans." },
-            { n: "04", title: "Custom App", desc: "Memberships, payments, merch, ticketing. Blockchain-ready." },
+            { n: "04", title: "Custom App", desc: "Memberships, payments, merch, ticketing. Built-in payments and memberships." },
           ].map((item) => (
-            <div key={item.n} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover">
+            <div key={item.n} className="border border-[oklch(0.25_0_0)] p-5 md:p-6 card-hover">
               <span className="font-mono text-[10px] text-[oklch(0.7_0.2_45)] tracking-[0.2em] mb-6 block">{item.n}</span>
               <h3 className="font-display text-xl mb-3">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
@@ -357,20 +296,20 @@ function Product() {
 
 function Machine() {
   return (
-    <AnimatedSection id="machine" animation="slide-right" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
+    <AnimatedSection id="machine" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>04 / The Machine</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-3">MORE THAN AN APP</h2>
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-xl mb-10">An AI-Powered Organization</p>
-        <div data-animate className="border border-[oklch(0.25_0_0)] bg-[oklch(0.12_0_0)] p-6 md:p-10">
+        <div data-animate className="border border-[oklch(0.25_0_0)] bg-[oklch(0.1_0_0)] p-6 md:p-10">
           <div className="grid md:grid-cols-2 gap-16">
             <div>
               <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-8 block">The Org Chart</span>
               <div className="font-mono text-xs leading-relaxed text-[oklch(0.95_0_0)]/50">
-                <p className="text-[oklch(0.95_0_0)]/80 mb-5">THE CREATOR — Board of Directors</p>
+                <p className="text-[oklch(0.95_0_0)]/80 mb-5">THE CREATOR / Board of Directors</p>
                 <div className="pl-5 border-l border-[oklch(0.25_0_0)] space-y-2">
-                  <p className="text-[oklch(0.7_0.2_45)]">Paperclip — AI CEO</p>
+                  <p className="text-[oklch(0.7_0.2_45)]">AI Operations Manager (runs every department automatically)</p>
                   <div className="pl-5 border-l border-[oklch(0.25_0_0)] space-y-1.5">
                     <p>Engineering</p><p>Growth</p><p>Operations</p>
                   </div>
@@ -380,7 +319,7 @@ function Machine() {
             <div>
               <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-8 block">How It Works</span>
               <div className="space-y-5">
-                {[["OpenClaw","AI agents as your employees"],["Paperclip","Orchestrates the entire business"],["Creator","Opens tickets, sets direction"],["We manage","Maintenance, scaling, support"]].map(([label, desc]) => (
+                {[["OpenClaw","AI workers handling engineering, marketing, and ops 24/7"],["Paperclip","Orchestrates the entire business"],["Creator","Opens tickets, sets direction"],["We manage","Maintenance, scaling, support"]].map(([label, desc]) => (
                   <div key={label} className="flex gap-5">
                     <span className="text-[oklch(0.7_0.2_45)] font-mono text-xs tracking-wide w-20 shrink-0 pt-0.5">{label}</span>
                     <span className="text-[oklch(0.95_0_0)]/50">{desc}</span>
@@ -402,26 +341,26 @@ function Machine() {
 
 function Blueprint() {
   return (
-    <AnimatedSection id="blueprint" animation="fade-up" className="px-6 md:px-12 md:pl-28">
+    <AnimatedSection id="blueprint" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>05 / The Blueprint</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
           THE BUSINESS <span className="text-[oklch(0.7_0.2_45)]">BLUEPRINT</span>
         </h2>
-        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-12 max-w-lg">We don&apos;t just build apps — we build businesses.</p>
+        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-16 max-w-lg">We don&apos;t just build apps. We build businesses.</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 pr-2 overflow-hidden" data-animate>
           {[
             { title: "Content Systems", desc: "Hook frameworks, retention strategies, audience growth playbooks" },
             { title: "Marketing & Funnels", desc: "Lead flow, audience ranking, customer lens framework" },
-            { title: "Offer Architecture", desc: "DIY to DWY to DFY stacking, sequential skimming, pricing" },
+            { title: "Offer Architecture", desc: "Tiered offer design, from self-serve to fully managed, with strategic pricing" },
             { title: "Launch Plans", desc: "Minimal launch to full deploy, soft launch to scale" },
             { title: "Operations", desc: "Sales blueprints, admin systems, financial operating models" },
-            { title: "Community", desc: "B2C + B2B content strategy, conversion content, social proof" },
+            { title: "Community", desc: "Fan-facing and business-facing content strategy, with built-in social proof" },
           ].map((item) => (
-            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover">
+            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-6 card-hover">
               <div className="accent-line mb-5" />
-              <h3 className="font-display text-xl mb-3">{item.title}</h3>
+              <h3 className="font-display text-lg mb-3">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
@@ -435,7 +374,7 @@ function Blueprint() {
 
 function Partnership() {
   return (
-    <AnimatedSection id="partnership" animation="split" className="px-6 md:px-12 md:pl-28">
+    <AnimatedSection id="partnership" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>06 / The Partnership</SectionLabel>
@@ -449,9 +388,9 @@ function Partnership() {
             <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/30 uppercase mb-8">Los Angeles</p>
             <div className="space-y-4 text-[oklch(0.95_0_0)]/50 text-sm leading-relaxed">
               <p>15+ years Hollywood x digital</p>
-              <p>First Latina dealmaker in new media</p>
+              <p>First Latina dealmaker in the creator economy</p>
               <p>Jay Versace, JC Caylen, Kendrick Sampson</p>
-              <p className="italic text-[oklch(0.95_0_0)]/70">&ldquo;Representation 2.0&rdquo; — creators as media cos</p>
+              <p className="italic text-[oklch(0.95_0_0)]/70">&ldquo;Representation 2.0&rdquo;: creators as media companies</p>
               <p>Six-figure global partnerships</p>
             </div>
           </div>
@@ -463,7 +402,7 @@ function Partnership() {
               <p className="text-[oklch(0.7_0.2_45)]">39 autonomous AI agents in production</p>
               <p>Full-stack engineering + business systems</p>
               <p>OpenClaw + Paperclip orchestration</p>
-              <p>Blockchain + fintech infrastructure</p>
+              <p>Direct-to-fan payments and financial tools</p>
               <p className="text-[oklch(0.7_0.2_45)]">44.7x ROI on AI operations</p>
             </div>
           </div>
@@ -477,7 +416,7 @@ function Partnership() {
 
 function ForCreators() {
   return (
-    <AnimatedSection id="creators" animation="slide-left" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
+    <AnimatedSection id="creators" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>07 / For Creators</SectionLabel>
@@ -486,13 +425,13 @@ function ForCreators() {
         </h2>
         <div className="grid sm:grid-cols-2" data-animate>
           {[
-            { title: "Custom Platform", desc: "A branded app built for their medium and audience. Podcast, video, publishing, or hybrid — designed around how they create." },
-            { title: "AI-Powered Ops", desc: "A full AI organization running behind the scenes. Engineering, growth, operations — managed by Bearified, powered by OpenClaw + Paperclip." },
-            { title: "Own Their Data + Money", desc: "They own the users, the analytics, the revenue. Blockchain-enabled payments let creators become their own bank — no middlemen." },
-            { title: "Managed Service", desc: "We handle the tech, the maintenance, the scaling. They focus on what they do best — create. We run the machine." },
+            { title: "Custom Platform", desc: "A branded app built for their medium and audience. Podcast, video, publishing, or hybrid. Designed around how they create." },
+            { title: "AI-Powered Ops", desc: "A full AI organization running behind the scenes. Engineering, growth, operations. Managed by Bearified." },
+            { title: "Own Their Data + Money", desc: "They own the users, the analytics, the revenue. Direct payments mean creators keep more of every dollar. No platform cut." },
+            { title: "Managed Service", desc: "We handle the tech, the maintenance, the scaling. They focus on what they do best: creating. We run the machine." },
           ].map((item) => (
             <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover">
-              <div className="accent-line mb-5" /><h3 className="font-display text-xl mb-4">{item.title}</h3>
+              <div className="accent-line mb-6" /><h3 className="font-display text-2xl mb-4">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 leading-relaxed text-sm">{item.desc}</p>
             </div>
           ))}
@@ -506,7 +445,7 @@ function ForCreators() {
 
 function ForPiza() {
   return (
-    <AnimatedSection id="piza" animation="slide-right" className="px-6 md:px-12 md:pl-28">
+    <AnimatedSection id="piza" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>08 / For Piza.Global</SectionLabel>
@@ -521,7 +460,7 @@ function ForPiza() {
             { title: "A Tech Partner", desc: "Not a vendor. A partner who brings engineering depth, business systems, and a shared vision for where this goes." },
           ].map((item) => (
             <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover">
-              <div className="accent-line mb-5" /><h3 className="font-display text-xl mb-4">{item.title}</h3>
+              <div className="accent-line mb-6" /><h3 className="font-display text-2xl mb-4">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 leading-relaxed text-sm">{item.desc}</p>
             </div>
           ))}
@@ -535,17 +474,17 @@ function ForPiza() {
 
 function Proof() {
   return (
-    <AnimatedSection id="proof" animation="scale" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
+    <AnimatedSection id="proof" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>09 / The Proof</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
           THE <span className="text-[oklch(0.7_0.2_45)]">PROOF</span>
         </h2>
-        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-12 max-w-lg">
+        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-16 max-w-lg">
           Bearified runs on the same stack we deploy for creators.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" data-animate>
+        <div className="grid grid-cols-2 lg:grid-cols-4" data-animate>
           {[
             { value: "39", label: "AI Agents", sub: "In Production" },
             { value: "$1.4K", label: "Monthly", sub: "Operating Cost" },
@@ -560,10 +499,10 @@ function Proof() {
           ))}
         </div>
         <div data-animate className="border border-[oklch(0.7_0.2_45)]/20 p-8 md:p-14 bg-[oklch(0.7_0.2_45)]/[0.04] mt-8">
-          <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-5 block">We Eat Our Own Cooking</span>
+          <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-5 block">Built on the Same Stack</span>
           <p className="text-[oklch(0.95_0_0)]/50 leading-relaxed max-w-2xl">
-            OpenClaw + Paperclip + Claude Code + Cowork — all dogfooded internally. We&apos;re building fintech apps,
-            prediction markets, and blockchain products on the same infrastructure we&apos;ll deploy for Piza.Global creators.
+            Every tool we offer creators, we use to run our own company. This isn&apos;t theoretical. It&apos;s operational.
+            We&apos;re building fintech apps, prediction markets, and payment products on the same infrastructure we&apos;ll deploy for Piza.Global creators.
           </p>
         </div>
       </div>
@@ -575,7 +514,7 @@ function Proof() {
 
 function Roadmap() {
   return (
-    <AnimatedSection id="roadmap" animation="fade-up" className="px-6 md:px-12 md:pl-28">
+    <AnimatedSection id="roadmap" className="px-6 md:px-12 md:pl-28">
 
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>10 / The Roadmap</SectionLabel>
@@ -618,7 +557,7 @@ function Roadmap() {
 
 function Closing() {
   return (
-    <AnimatedSection id="closing" animation="scale" className="px-6 md:px-12 text-center bg-[oklch(0.10_0_0)]">
+    <AnimatedSection id="closing" animation="scale" className="px-6 md:px-12 text-center">
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="font-display text-[50vw] leading-none" style={{ color: "oklch(0.7 0.2 45 / 0.02)" }}>B</span>
@@ -628,7 +567,7 @@ function Closing() {
           LET&apos;S<br /><span className="text-[oklch(0.7_0.2_45)]">BUILD.</span>
         </h2>
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-12 max-w-md mx-auto">
-          Formalize the partnership. Pick the first pilot creators. Start building their platforms.
+          Lock in the partnership. Choose the first creators. Start building their platforms.
         </p>
         <div className="grid sm:grid-cols-2 max-w-2xl mx-auto" data-animate>
           <div className="border border-[oklch(0.25_0_0)] p-8 md:p-10 text-left">
