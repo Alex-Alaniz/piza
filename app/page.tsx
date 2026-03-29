@@ -225,8 +225,12 @@ function Problem() {
 function Shift() {
   return (
     <AnimatedSection id="shift" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
-
-      <div className="section-inner max-w-[1200px] mx-auto w-full">
+      {/* Background image */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <img src="/blueprint/3-components-marketing.png" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.05]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.10_0_0)] via-transparent to-[oklch(0.10_0_0)]" />
+      </div>
+      <div className="section-inner max-w-[1200px] mx-auto w-full relative z-10">
         <SectionLabel data-animate>02 / The Shift</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
           AI COLLAPSED THE COST<br />
@@ -266,8 +270,12 @@ function Shift() {
 function Product() {
   return (
     <AnimatedSection id="product" className="px-6 md:px-12 md:pl-28">
-
-      <div className="section-inner max-w-[1200px] mx-auto w-full">
+      {/* Background: Master Light blueprint */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <img src="/blueprint/master-light.png" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.04]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.08_0_0)] via-[oklch(0.08_0_0)]/70 to-[oklch(0.08_0_0)]/90" />
+      </div>
+      <div className="section-inner max-w-[1200px] mx-auto w-full relative z-10">
         <SectionLabel data-animate>03 / The Product</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
           THE CREATOR <span className="text-[oklch(0.7_0.2_45)]">PLATFORM</span>
@@ -302,8 +310,13 @@ function Product() {
 function Machine() {
   return (
     <AnimatedSection id="machine" className="px-6 md:px-12 md:pl-28 bg-[oklch(0.10_0_0)]">
-
-      <div className="section-inner max-w-[1200px] mx-auto w-full">
+      {/* Background: Master Dark + High Ticket VSL */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <img src="/blueprint/master-dark.png" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.06]" />
+        <img src="/blueprint/high-ticket-vsl.png" alt="" className="absolute right-0 top-0 h-full w-1/2 object-contain object-right opacity-[0.04]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.10_0_0)] via-[oklch(0.10_0_0)]/80 to-[oklch(0.10_0_0)]/60" />
+      </div>
+      <div className="section-inner max-w-[1200px] mx-auto w-full relative z-10">
         <SectionLabel data-animate>04 / The Machine</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-3">MORE THAN AN APP</h2>
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-xl mb-10">An AI-Powered Organization</p>
