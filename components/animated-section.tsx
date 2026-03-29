@@ -67,7 +67,7 @@ export default function AnimatedSection({
   return (
     <section
       ref={ref}
-      className={`relative min-h-screen flex items-center py-20 md:py-28 ${className}`}
+      className={`relative min-h-screen flex items-center py-20 md:py-28 slide-divider ${className}`}
       id={id}
     >
       {children}

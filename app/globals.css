@@ -25,7 +25,7 @@
   --color-border: var(--border);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: auto;
@@ -172,6 +172,33 @@ body {
   color: oklch(0.95 0 0 / 0.15);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
+}
+
+/* ─── Slide divider (fade edges) ─────────────── */
+.slide-divider {
+  position: relative;
+}
+.slide-divider::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, oklch(0.05 0 0));
+  pointer-events: none;
+  z-index: 5;
+}
+.slide-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, transparent, oklch(0.05 0 0));
+  pointer-events: none;
+  z-index: 5;
 }
 
 @media (max-width: 768px) {
