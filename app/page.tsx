@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import SmoothScroll from "@/components/smooth-scroll"
 import NoiseOverlay from "@/components/noise-overlay"
 import AnimatedSection from "@/components/animated-section"
@@ -41,19 +41,51 @@ export default function PitchPage() {
 
 /* ─── SLIDE DOTS NAV ───────────────────────────────────── */
 
+const SECTION_IDS = ["hero","problem","shift","product","machine","blueprint","partnership","creators","piza","proof","roadmap","closing"] as const
+
 function SlideDots() {
+  const [activeSection, setActiveSection] = useState<string>("hero")
+
+  useEffect(() => {
+    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[]
+    if (elements.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    for (const el of elements) {
+      observer.observe(el)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <nav aria-label="Section navigation" className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3">
-      {["hero","problem","shift","product","machine","blueprint","partnership","creators","piza","proof","roadmap","closing"].map((id) => (
-        <a
-          key={id}
-          href={`#${id}`}
-          aria-label={id}
-          className="w-4 h-4 flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-[oklch(0.7_0.2_45)]"
-        >
-          <span className="w-1.5 h-1.5 bg-[oklch(0.95_0_0)]/15 hover:bg-[oklch(0.7_0.2_45)] transition-colors duration-300 block" />
-        </a>
-      ))}
+      {SECTION_IDS.map((id) => {
+        const isActive = activeSection === id
+        return (
+          <a
+            key={id}
+            href={`#${id}`}
+            aria-label={id}
+            aria-current={isActive ? "true" : undefined}
+            className="w-4 h-4 flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-[oklch(0.7_0.2_45)]"
+          >
+            <span
+              className={`${isActive ? "w-2 h-2 bg-[oklch(0.7_0.2_45)]" : "w-1.5 h-1.5 bg-[oklch(0.95_0_0)]/15"} hover:bg-[oklch(0.7_0.2_45)] transition-all duration-300 block`}
+            />
+          </a>
+        )
+      })}
     </nav>
   )
 }
@@ -103,7 +135,7 @@ function Hero() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center px-6 md:px-12 md:pl-28 overflow-hidden">
+    <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center py-20 md:py-28 px-6 md:px-12 md:pl-28 overflow-hidden">
 
 
       {/* Vertical label */}
@@ -116,7 +148,7 @@ function Hero() {
         <span className="font-display text-[40vw] leading-none" style={{ color: "oklch(0.7 0.2 45 / 0.02)" }}>P</span>
       </div>
 
-      <div ref={contentRef} className="section-inner max-w-[1200px] mx-auto w-full pt-24">
+      <div ref={contentRef} className="section-inner max-w-[1200px] mx-auto w-full">
         <div className="label-badge mb-10">March 2026</div>
         <h1 className="font-display text-[clamp(3.5rem,12vw,11rem)] leading-[0.85] mb-8">
           OWN YOUR<br />
@@ -133,7 +165,7 @@ function Hero() {
             <ScrambleText text="See The Proof" />
           </a>
         </div>
-        <div className="mt-24 flex items-center gap-8 text-[oklch(0.95_0_0)]/15 font-mono text-[10px] tracking-[0.2em] uppercase">
+        <div className="mt-24 flex items-center gap-8 text-[oklch(0.95_0_0)]/30 font-mono text-[10px] tracking-[0.2em] uppercase">
           <span>Scroll to explore</span>
           <span className="w-12 h-px bg-[oklch(0.25_0_0)]" />
         </div>
@@ -317,7 +349,7 @@ function Blueprint() {
           THE BUSINESS <span className="text-[oklch(0.7_0.2_45)]">BLUEPRINT</span>
         </h2>
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-16 max-w-lg">We don&apos;t just build apps — we build businesses.</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3" data-animate>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 pr-2 overflow-hidden" data-animate>
           {[
             { title: "Content Systems", desc: "Hook frameworks, retention strategies, audience growth playbooks" },
             { title: "Marketing & Funnels", desc: "Lead flow, audience ranking, customer lens framework" },
@@ -530,7 +562,7 @@ function Closing() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="font-display text-[50vw] leading-none" style={{ color: "oklch(0.7 0.2 45 / 0.02)" }}>B</span>
       </div>
-      <div className="section-inner max-w-[1000px] mx-auto relative z-10">
+      <div className="section-inner flex flex-col max-w-[1000px] mx-auto w-full relative z-10">
         <h2 data-animate className="font-display text-[clamp(4rem,14vw,12rem)] leading-[0.85] mb-14">
           LET&apos;S<br /><span className="text-[oklch(0.7_0.2_45)]">BUILD.</span>
         </h2>
@@ -551,17 +583,11 @@ function Closing() {
             <a href="https://pitch.bearified.co" className="text-[oklch(0.95_0_0)]/30 font-mono text-xs hover:text-[oklch(0.7_0.2_45)] transition-colors">pitch.bearified.co</a>
           </div>
         </div>
-        {/* Footer integrated into closing slide */}
-        <footer className="absolute bottom-0 left-0 right-0 border-t border-[oklch(0.25_0_0)] py-8 px-6 md:px-12">
-          <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3 text-[oklch(0.95_0_0)]/20">
-              <span className="font-display tracking-[0.1em] text-sm">PIZA.GLOBAL</span>
-              <span className="font-mono text-[10px]">x</span>
-              <span className="font-display tracking-[0.1em] text-sm">BEARIFIED</span>
-            </div>
-            <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/15 uppercase">Own Your Platform | Confidential 2026</p>
-          </div>
-        </footer>
+        <div className="mt-auto pt-8 border-t border-[oklch(0.25_0_0)] text-center">
+          <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/15 uppercase">
+            Piza.Global x Bearified | Own Your Platform | Confidential 2026
+          </p>
+        </div>
       </div>
     </AnimatedSection>
   )
