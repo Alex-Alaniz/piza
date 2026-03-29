@@ -283,19 +283,26 @@ function Product() {
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-16 max-w-lg">
           Tailored to their medium. Branded to their identity. Owned by the creator.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4" data-animate>
-          {[
-            { n: "01", title: "Podcast App", desc: "Audio-first experience. Episodes, playlists, exclusive drops." },
-            { n: "02", title: "Video App", desc: "Creator-branded streaming platform. Owned library." },
-            { n: "03", title: "Publishing", desc: "Blog, newsletter, premium articles. Direct to fans." },
-            { n: "04", title: "Custom App", desc: "Memberships, payments, merch, ticketing. Built-in payments and memberships." },
-          ].map((item) => (
-            <div key={item.n} className="border border-[oklch(0.25_0_0)] p-5 md:p-6 card-hover">
-              <span className="font-mono text-[10px] text-[oklch(0.7_0.2_45)] tracking-[0.2em] mb-6 block">{item.n}</span>
-              <h3 className="font-display text-xl mb-3">{item.title}</h3>
-              <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+        <div className="relative" data-animate>
+          {/* Master Light blueprint behind the product cards */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-sm">
+            <img src="/blueprint/master-light.png" alt="" className="w-full h-full object-cover opacity-[0.04]" />
+            <div className="absolute inset-0 bg-[oklch(0.08_0_0)]/70" />
+          </div>
+          <div className="relative z-10 grid sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "01", title: "Podcast App", desc: "Audio-first experience. Episodes, playlists, exclusive drops." },
+              { n: "02", title: "Video App", desc: "Creator-branded streaming platform. Owned library." },
+              { n: "03", title: "Publishing", desc: "Blog, newsletter, premium articles. Direct to fans." },
+              { n: "04", title: "Custom App", desc: "Memberships, payments, merch, ticketing. Built-in payments and memberships." },
+            ].map((item) => (
+              <div key={item.n} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover backdrop-blur-sm">
+                <span className="font-mono text-[10px] text-[oklch(0.7_0.2_45)] tracking-[0.2em] mb-6 block">{item.n}</span>
+                <h3 className="font-display text-xl mb-3">{item.title}</h3>
+                <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
         <p data-animate className="text-center font-mono text-[10px] tracking-[0.3em] text-[oklch(0.7_0.2_45)] mt-10">
           NOT A TEMPLATE. A REAL PRODUCT.
@@ -320,8 +327,13 @@ function Machine() {
         <SectionLabel data-animate>04 / The Machine</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-3">MORE THAN AN APP</h2>
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-xl mb-10">An AI-Powered Organization</p>
-        <div data-animate className="border border-[oklch(0.25_0_0)] bg-[oklch(0.1_0_0)] p-6 md:p-10">
-          <div className="grid md:grid-cols-2 gap-16">
+        <div data-animate className="border border-[oklch(0.25_0_0)] bg-[oklch(0.12_0_0)] relative overflow-hidden">
+          {/* Master Dark blueprint as card background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <img src="/blueprint/master-dark.png" alt="" className="w-full h-full object-cover opacity-[0.08]" />
+            <div className="absolute inset-0 bg-[oklch(0.12_0_0)]/80" />
+          </div>
+          <div className="relative z-10 p-6 md:p-10 grid md:grid-cols-2 gap-16">
             <div>
               <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-8 block">The Org Chart</span>
               <div className="font-mono text-xs leading-relaxed text-[oklch(0.95_0_0)]/50">
@@ -349,7 +361,7 @@ function Machine() {
               </div>
             </div>
           </div>
-        </div>
+        </div>  {/* closes relative z-10 grid wrapper + outer card */}
       </div>
     </AnimatedSection>
   )
