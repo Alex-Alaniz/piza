@@ -3,14 +3,19 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #050505;
-  --foreground: #fafafa;
-  --accent: #F4A261;
-  --accent-dim: #c47d3a;
-  --muted: #888;
-  --border: rgba(255, 255, 255, 0.06);
-  --card: rgba(255, 255, 255, 0.03);
-  --radius: 0.5rem;
+  /* Bearified OKLCH color system */
+  --background: oklch(0.08 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.12 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.7 0.2 45);
+  --accent-foreground: oklch(0.08 0 0);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.7 0.2 45);
+  --radius: 0rem;
 }
 
 @theme inline {
@@ -21,6 +26,7 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-card: var(--card);
 }
@@ -32,130 +38,156 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: oklch(0.08 0 0);
+  color: oklch(0.95 0 0);
   font-family: var(--font-sans);
   overflow-x: hidden;
   line-height: 1.5;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--background);
+  background: oklch(0.7 0.2 45);
+  color: oklch(0.08 0 0);
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: oklch(0.08 0 0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 2px;
+  background: oklch(0.7 0.2 45);
+  border-radius: 0;
 }
 
-/* Display font class */
+/* ─── Display font ─────────────────────────────── */
 .font-display {
   font-family: var(--font-display);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-/* Grid background */
+/* ─── Grid background (bearified pattern) ──────── */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.2 0 0) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.2 0 0) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* Fade in animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ─── Accent line ──────────────────────────────── */
+.accent-line {
+  width: 32px;
+  height: 2px;
+  background: oklch(0.7 0.2 45);
 }
 
-.animate-in {
-  animation: fadeInUp 0.8s ease-out forwards;
+/* ─── Section label (bearified pattern) ────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: oklch(0.7 0.2 45);
 }
 
-.animate-in-delay-1 { animation-delay: 0.1s; opacity: 0; }
-.animate-in-delay-2 { animation-delay: 0.2s; opacity: 0; }
-.animate-in-delay-3 { animation-delay: 0.3s; opacity: 0; }
-.animate-in-delay-4 { animation-delay: 0.4s; opacity: 0; }
-.animate-in-delay-5 { animation-delay: 0.5s; opacity: 0; }
-
-/* Scrolling marquee */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-inner {
+/* ─── Label badge ──────────────────────────────── */
+.label-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.7 0.2 45);
+  border: 1px solid oklch(0.7 0.2 45 / 0.25);
+  padding: 5px 14px;
   display: inline-block;
-  animation: marquee 30s linear infinite;
-  white-space: nowrap;
 }
 
-/* Stat counter glow */
+/* ─── Stat glow ────────────────────────────────── */
 .stat-glow {
-  text-shadow: 0 0 40px rgba(244, 162, 97, 0.3);
+  text-shadow: 0 0 60px oklch(0.7 0.2 45 / 0.4);
 }
 
-/* Card hover effect */
+/* ─── Card hover ───────────────────────────────── */
 .card-hover {
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 .card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(244, 162, 97, 0.2);
+  border-color: oklch(0.7 0.2 45 / 0.2) !important;
+  background-color: oklch(0.7 0.2 45 / 0.03) !important;
 }
 
-/* Divider */
-.divider {
+/* ─── Divider ──────────────────────────────────── */
+.divider-line {
   height: 1px;
-  background: var(--border);
+  background: oklch(0.25 0 0);
   width: 100%;
 }
 
-/* Section spacing */
-section {
-  position: relative;
+/* ─── Scanlines overlay ────────────────────────── */
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
 }
 
-/* Accent line */
-.accent-line {
-  width: 40px;
-  height: 2px;
-  background: var(--accent);
-}
-
-/* Label badge */
-.label-badge {
+/* ─── CTA button ───────────────────────────────── */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: oklch(0.7 0.2 45);
+  color: oklch(0.08 0 0);
+  padding: 14px 32px;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 11px;
+  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid rgba(244, 162, 97, 0.3);
-  padding: 4px 12px;
-  display: inline-block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.cta-primary:hover {
+  background: oklch(0.6 0.18 45);
 }
 
-/* Responsive */
+.cta-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid oklch(0.95 0 0 / 0.15);
+  color: oklch(0.95 0 0);
+  padding: 14px 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.cta-outline:hover {
+  border-color: oklch(0.7 0.2 45);
+  color: oklch(0.7 0.2 45);
+}
+
+/* ─── Responsive ───────────────────────────────── */
 @media (max-width: 768px) {
   .font-display {
     letter-spacing: 0.02em;
