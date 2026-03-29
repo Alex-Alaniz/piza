@@ -3,17 +3,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Bearified OKLCH color system */
   --background: oklch(0.08 0 0);
   --foreground: oklch(0.95 0 0);
   --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.95 0 0);
   --muted: oklch(0.25 0 0);
   --muted-foreground: oklch(0.55 0 0);
   --accent: oklch(0.7 0.2 45);
   --accent-foreground: oklch(0.08 0 0);
   --border: oklch(0.25 0 0);
-  --input: oklch(0.2 0 0);
   --ring: oklch(0.7 0.2 45);
   --radius: 0rem;
 }
@@ -25,24 +22,18 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-card: var(--card);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
+  scroll-snap-type: y proximity;
 }
 
 body {
-  background-color: oklch(0.08 0 0);
+  background: oklch(0.08 0 0);
   color: oklch(0.95 0 0);
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -54,86 +45,25 @@ body {
   color: oklch(0.08 0 0);
 }
 
-::-webkit-scrollbar {
-  width: 3px;
-}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: oklch(0.08 0 0); }
+::-webkit-scrollbar-thumb { background: oklch(0.7 0.2 45); }
 
-::-webkit-scrollbar-track {
-  background: oklch(0.08 0 0);
-}
-
-::-webkit-scrollbar-thumb {
-  background: oklch(0.7 0.2 45);
-  border-radius: 0;
-}
-
-/* ─── Display font ─────────────────────────────── */
-.font-display {
-  font-family: var(--font-display);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-/* ─── Grid background (bearified pattern) ──────── */
-.grid-bg {
+/* ─── Fixed grid background (bearified pattern) ── */
+.grid-bg-fixed {
+  position: fixed;
+  inset: 0;
   background-image:
     linear-gradient(to right, oklch(0.2 0 0) 1px, transparent 1px),
     linear-gradient(to bottom, oklch(0.2 0 0) 1px, transparent 1px);
   background-size: 60px 60px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* ─── Accent line ──────────────────────────────── */
-.accent-line {
-  width: 32px;
-  height: 2px;
-  background: oklch(0.7 0.2 45);
-}
-
-/* ─── Section label (bearified pattern) ────────── */
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: oklch(0.7 0.2 45);
-}
-
-/* ─── Label badge ──────────────────────────────── */
-.label-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: oklch(0.7 0.2 45);
-  border: 1px solid oklch(0.7 0.2 45 / 0.25);
-  padding: 5px 14px;
-  display: inline-block;
-}
-
-/* ─── Stat glow ────────────────────────────────── */
-.stat-glow {
-  text-shadow: 0 0 60px oklch(0.7 0.2 45 / 0.4);
-}
-
-/* ─── Card hover ───────────────────────────────── */
-.card-hover {
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-.card-hover:hover {
-  border-color: oklch(0.7 0.2 45 / 0.2) !important;
-  background-color: oklch(0.7 0.2 45 / 0.03) !important;
-}
-
-/* ─── Divider ──────────────────────────────────── */
-.divider-line {
-  height: 1px;
-  background: oklch(0.25 0 0);
-  width: 100%;
-}
-
-/* ─── Scanlines overlay ────────────────────────── */
-.scanlines::after {
-  content: "";
+/* ─── Scanlines ───────────────────────────────── */
+.scanlines {
   position: fixed;
   inset: 0;
   z-index: 999;
@@ -147,7 +77,56 @@ body {
   );
 }
 
-/* ─── CTA button ───────────────────────────────── */
+/* ─── Display font ────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── Section label (bearified pattern) ────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: oklch(0.7 0.2 45);
+}
+
+/* ─── Label badge ─────────────────────────────── */
+.label-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.7 0.2 45);
+  border: 1px solid oklch(0.7 0.2 45 / 0.25);
+  padding: 5px 14px;
+  display: inline-block;
+}
+
+/* ─── Accent line ─────────────────────────────── */
+.accent-line {
+  width: 32px;
+  height: 2px;
+  background: oklch(0.7 0.2 45);
+}
+
+/* ─── Stat glow ───────────────────────────────── */
+.stat-glow {
+  text-shadow: 0 0 60px oklch(0.7 0.2 45 / 0.4);
+}
+
+/* ─── Card hover ──────────────────────────────── */
+.card-hover {
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.card-hover:hover {
+  border-color: oklch(0.7 0.2 45 / 0.2) !important;
+  background: oklch(0.7 0.2 45 / 0.03) !important;
+}
+
+/* ─── CTA buttons (bearified pattern) ─────────── */
 .cta-primary {
   display: inline-flex;
   align-items: center;
@@ -163,9 +142,7 @@ body {
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.cta-primary:hover {
-  background: oklch(0.6 0.18 45);
-}
+.cta-primary:hover { background: oklch(0.6 0.18 45); }
 
 .cta-outline {
   display: inline-flex;
@@ -187,9 +164,19 @@ body {
   color: oklch(0.7 0.2 45);
 }
 
-/* ─── Responsive ───────────────────────────────── */
+/* ─── Vertical label (bearified pattern) ──────── */
+.vertical-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: oklch(0.95 0 0 / 0.15);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
 @media (max-width: 768px) {
-  .font-display {
-    letter-spacing: 0.02em;
-  }
+  html { scroll-snap-type: none; }
+  .font-display { letter-spacing: 0.02em; }
+  .vertical-label { display: none; }
 }
