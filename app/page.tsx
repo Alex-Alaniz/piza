@@ -143,9 +143,14 @@ function Hero() {
         <span className="vertical-label">PIZA.GLOBAL x BEARIFIED</span>
       </div>
 
-      {/* Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="font-display text-[40vw] leading-none" style={{ color: "oklch(0.7 0.2 45 / 0.02)" }}>P</span>
+      {/* Blueprint background image */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <img
+          src="/blueprint/master-dark.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.06]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.08_0_0)] via-[oklch(0.08_0_0)]/80 to-transparent" />
       </div>
 
       <div ref={contentRef} className="section-inner max-w-[1200px] mx-auto w-full">
@@ -349,19 +354,25 @@ function Blueprint() {
           THE BUSINESS <span className="text-[oklch(0.7_0.2_45)]">BLUEPRINT</span>
         </h2>
         <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-16 max-w-lg">We don&apos;t just build apps. We build businesses.</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 pr-2 overflow-hidden" data-animate>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3" data-animate>
           {[
-            { title: "Content Systems", desc: "Hook frameworks, retention strategies, audience growth playbooks" },
-            { title: "Marketing & Funnels", desc: "Lead flow, audience ranking, customer lens framework" },
-            { title: "Offer Architecture", desc: "Tiered offer design, from self-serve to fully managed, with strategic pricing" },
-            { title: "Launch Plans", desc: "Minimal launch to full deploy, soft launch to scale" },
-            { title: "Operations", desc: "Sales blueprints, admin systems, financial operating models" },
-            { title: "Community", desc: "Fan-facing and business-facing content strategy, with built-in social proof" },
+            { title: "Content Systems", desc: "Hook frameworks, retention strategies, audience growth playbooks", img: "/blueprint/content-that-sells.png" },
+            { title: "Marketing & Funnels", desc: "Lead flow, audience ranking, customer lens framework", img: "/blueprint/lead-flow-funnel.png" },
+            { title: "Offer Architecture", desc: "Tiered offer design, from self-serve to fully managed, with strategic pricing", img: "/blueprint/offer-stacking.png" },
+            { title: "Launch Plans", desc: "Minimal launch to full deploy, soft launch to scale", img: "/blueprint/launch-plan.png" },
+            { title: "Operations", desc: "Sales blueprints, admin systems, financial operating models", img: "/blueprint/sales-funnel.png" },
+            { title: "Community", desc: "Fan-facing and business-facing content strategy, with built-in social proof", img: "/blueprint/community.png" },
           ].map((item) => (
-            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-6 card-hover">
-              <div className="accent-line mb-5" />
-              <h3 className="font-display text-lg mb-3">{item.title}</h3>
-              <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
+            <div key={item.title} className="border border-[oklch(0.25_0_0)] card-hover group overflow-hidden">
+              <div className="relative h-32 overflow-hidden">
+                <img src={item.img} alt={item.title} className="w-full h-full object-cover object-top opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.08_0_0)] via-[oklch(0.08_0_0)]/60 to-transparent" />
+              </div>
+              <div className="p-5 md:p-7">
+                <div className="accent-line mb-5" />
+                <h3 className="font-display text-xl mb-3">{item.title}</h3>
+                <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -498,12 +509,19 @@ function Proof() {
             </div>
           ))}
         </div>
-        <div data-animate className="border border-[oklch(0.7_0.2_45)]/20 p-8 md:p-14 bg-[oklch(0.7_0.2_45)]/[0.04] mt-8">
-          <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-5 block">Built on the Same Stack</span>
-          <p className="text-[oklch(0.95_0_0)]/50 leading-relaxed max-w-2xl">
-            Every tool we offer creators, we use to run our own company. This isn&apos;t theoretical. It&apos;s operational.
-            We&apos;re building fintech apps, prediction markets, and payment products on the same infrastructure we&apos;ll deploy for Piza.Global creators.
-          </p>
+        <div data-animate className="border border-[oklch(0.7_0.2_45)]/20 bg-[oklch(0.7_0.2_45)]/[0.04] mt-8 overflow-hidden">
+          <div className="grid md:grid-cols-[1fr_280px]">
+            <div className="p-8 md:p-12">
+              <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-5 block">Built on the Same Stack</span>
+              <p className="text-[oklch(0.95_0_0)]/50 leading-relaxed max-w-xl">
+                Every tool we offer creators, we use to run our own company. This isn&apos;t theoretical. It&apos;s operational.
+              </p>
+            </div>
+            <div className="hidden md:block relative">
+              <img src="/blueprint/social-media-growth.png" alt="Growth System" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.7_0.2_45)]/[0.04] to-transparent" />
+            </div>
+          </div>
         </div>
       </div>
     </AnimatedSection>
