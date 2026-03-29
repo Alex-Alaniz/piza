@@ -149,19 +149,17 @@ function Problem() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>01 / The Problem</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-16">
-          THE CEILING<br />
-          <span className="text-[oklch(0.95_0_0)]/25">20M FOLLOWERS.</span><br />
-          ZERO CONTROL.
+        <h2 data-animate className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] mb-10">
+          THE CEILING — <span className="text-[oklch(0.95_0_0)]/25">20M FOLLOWERS.</span> ZERO CONTROL.
         </h2>
-        <div className="grid md:grid-cols-2 gap-16 md:gap-24">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div data-animate>
             <p className="text-[oklch(0.95_0_0)]/50 text-base md:text-lg leading-relaxed mb-10">
               Matt Rife built an empire on TikTok. Then the algorithm stopped pushing stand-up comedy.
               20 million followers — and he couldn&apos;t reach them.
             </p>
-            <blockquote className="border-l-2 border-[oklch(0.7_0.2_45)] pl-6 mb-10">
-              <p className="text-xl md:text-2xl italic text-[oklch(0.95_0_0)]/80 leading-snug">
+            <blockquote className="border-l-2 border-[oklch(0.7_0.2_45)] pl-6 mb-8">
+              <p className="text-lg italic text-[oklch(0.95_0_0)]/80 leading-snug">
                 &ldquo;Why can&apos;t you show my content to my own followers?&rdquo;
               </p>
             </blockquote>
@@ -192,7 +190,7 @@ function Shift() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>02 / The Shift</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-20">
+        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
           AI COLLAPSED THE COST<br />
           OF <span className="text-[oklch(0.7_0.2_45)]">BUILDING SOFTWARE.</span>
         </h2>
@@ -246,7 +244,7 @@ function Product() {
             { n: "03", title: "Publishing", desc: "Blog, newsletter, premium articles. Direct to fans." },
             { n: "04", title: "Custom App", desc: "Memberships, payments, merch, ticketing. Blockchain-ready." },
           ].map((item) => (
-            <div key={item.n} className="border border-[oklch(0.25_0_0)] p-7 md:p-8 card-hover">
+            <div key={item.n} className="border border-[oklch(0.25_0_0)] p-5 md:p-6 card-hover">
               <span className="font-mono text-[10px] text-[oklch(0.7_0.2_45)] tracking-[0.2em] mb-6 block">{item.n}</span>
               <h3 className="font-display text-xl mb-3">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
@@ -269,13 +267,13 @@ function Machine() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>04 / The Machine</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">MORE THAN AN APP</h2>
-        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-xl mb-16">An AI-Powered Organization</p>
-        <div data-animate className="border border-[oklch(0.25_0_0)] bg-[oklch(0.1_0_0)] p-8 md:p-14">
+        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-3">MORE THAN AN APP</h2>
+        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-xl mb-10">An AI-Powered Organization</p>
+        <div data-animate className="border border-[oklch(0.25_0_0)] bg-[oklch(0.1_0_0)] p-6 md:p-10">
           <div className="grid md:grid-cols-2 gap-16">
             <div>
               <span className="font-display text-xl text-[oklch(0.7_0.2_45)] mb-8 block">The Org Chart</span>
-              <div className="font-mono text-sm leading-loose text-[oklch(0.95_0_0)]/50">
+              <div className="font-mono text-xs leading-relaxed text-[oklch(0.95_0_0)]/50">
                 <p className="text-[oklch(0.95_0_0)]/80 mb-5">THE CREATOR — Board of Directors</p>
                 <div className="pl-5 border-l border-[oklch(0.25_0_0)] space-y-2">
                   <p className="text-[oklch(0.7_0.2_45)]">Paperclip — AI CEO</p>
@@ -327,7 +325,7 @@ function Blueprint() {
             { title: "Operations", desc: "Sales blueprints, admin systems, financial operating models" },
             { title: "Community", desc: "B2C + B2B content strategy, conversion content, social proof" },
           ].map((item) => (
-            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-7 md:p-8 card-hover">
+            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-6 card-hover">
               <div className="accent-line mb-5" />
               <h3 className="font-display text-lg mb-3">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 text-sm leading-relaxed">{item.desc}</p>
@@ -347,7 +345,7 @@ function Partnership() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>06 / The Partnership</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-20">
+        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
           WHY THIS <span className="text-[oklch(0.7_0.2_45)]">WORKS</span>
         </h2>
         <div className="grid md:grid-cols-2" data-animate>
@@ -389,7 +387,7 @@ function ForCreators() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>07 / For Creators</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-20">
+        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
           WHAT CREATORS <span className="text-[oklch(0.7_0.2_45)]">GET</span>
         </h2>
         <div className="grid sm:grid-cols-2" data-animate>
@@ -399,7 +397,7 @@ function ForCreators() {
             { title: "Own Their Data + Money", desc: "They own the users, the analytics, the revenue. Blockchain-enabled payments let creators become their own bank — no middlemen." },
             { title: "Managed Service", desc: "We handle the tech, the maintenance, the scaling. They focus on what they do best — create. We run the machine." },
           ].map((item) => (
-            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-8 md:p-10 card-hover">
+            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover">
               <div className="accent-line mb-6" /><h3 className="font-display text-2xl mb-4">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 leading-relaxed text-sm">{item.desc}</p>
             </div>
@@ -418,7 +416,7 @@ function ForPiza() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>08 / For Piza.Global</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-20">
+        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
           WHAT PIZA.GLOBAL <span className="text-[oklch(0.7_0.2_45)]">GETS</span>
         </h2>
         <div className="grid sm:grid-cols-2" data-animate>
@@ -428,7 +426,7 @@ function ForPiza() {
             { title: "Premium Service Tier", desc: "A new high-value offering that justifies higher management fees and attracts top-tier creators." },
             { title: "A Tech Partner", desc: "Not a vendor. A partner who brings engineering depth, business systems, and a shared vision for where this goes." },
           ].map((item) => (
-            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-8 md:p-10 card-hover">
+            <div key={item.title} className="border border-[oklch(0.25_0_0)] p-5 md:p-7 card-hover">
               <div className="accent-line mb-6" /><h3 className="font-display text-2xl mb-4">{item.title}</h3>
               <p className="text-[oklch(0.95_0_0)]/40 leading-relaxed text-sm">{item.desc}</p>
             </div>
@@ -487,7 +485,7 @@ function Roadmap() {
       <NoiseOverlay opacity={0.02} />
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>10 / The Roadmap</SectionLabel>
-        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-20">
+        <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
           THE <span className="text-[oklch(0.7_0.2_45)]">ROADMAP</span>
         </h2>
         <div className="grid md:grid-cols-3" data-animate>
@@ -499,14 +497,14 @@ function Roadmap() {
             { phase: "Phase 3", title: "Productize", when: "2027", active: false,
               items: ["Launch as a market offering","Attract new creators to Piza.Global","Scale managed service","Build the category"] },
           ].map((phase) => (
-            <div key={phase.phase} className={`border p-8 md:p-10 ${phase.active ? "border-[oklch(0.7_0.2_45)]/25 bg-[oklch(0.7_0.2_45)]/[0.05]" : "border-[oklch(0.25_0_0)]"}`}>
-              <div className="flex items-center justify-between mb-8">
+            <div key={phase.phase} className={`border p-5 md:p-7 ${phase.active ? "border-[oklch(0.7_0.2_45)]/25 bg-[oklch(0.7_0.2_45)]/[0.05]" : "border-[oklch(0.25_0_0)]"}`}>
+              <div className="flex items-center justify-between mb-5">
                 <span className="label-badge">{phase.phase}</span>
                 {phase.active && <span className="w-2 h-2 bg-[oklch(0.7_0.2_45)] animate-pulse" />}
               </div>
-              <h3 className="font-display text-2xl mb-1">{phase.title}</h3>
-              <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/30 uppercase mb-8">{phase.when}</p>
-              <div className="space-y-4">
+              <h3 className="font-display text-xl mb-1">{phase.title}</h3>
+              <p className="font-mono text-[10px] tracking-[0.2em] text-[oklch(0.95_0_0)]/30 uppercase mb-5">{phase.when}</p>
+              <div className="space-y-2">
                 {phase.items.map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <span className={`mt-2 w-1 h-1 shrink-0 ${phase.active ? "bg-[oklch(0.7_0.2_45)]" : "bg-[oklch(0.95_0_0)]/20"}`} />
@@ -535,7 +533,7 @@ function Closing() {
         <h2 data-animate className="font-display text-[clamp(4rem,14vw,12rem)] leading-[0.85] mb-14">
           LET&apos;S<br /><span className="text-[oklch(0.7_0.2_45)]">BUILD.</span>
         </h2>
-        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-20 max-w-md mx-auto">
+        <p data-animate className="text-[oklch(0.95_0_0)]/40 text-lg mb-12 max-w-md mx-auto">
           Formalize the partnership. Pick the first pilot creators. Start building their platforms.
         </p>
         <div className="grid sm:grid-cols-2 max-w-2xl mx-auto" data-animate>
