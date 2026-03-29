@@ -163,11 +163,11 @@ function Hero() {
           The future of creator business infrastructure.
         </p>
         <div className="flex flex-wrap gap-4">
-          <a href="#partnership" className="cta-primary">
-            <ScrambleText text="The Partnership" /><Arrow />
+          <a href="#problem" className="cta-primary">
+            <ScrambleText text="Explore The Deck" /><Arrow />
           </a>
           <a href="#proof" className="cta-outline">
-            <ScrambleText text="See The Proof" />
+            <ScrambleText text="Skip to Proof" />
           </a>
         </div>
         <div className="mt-24 flex items-center gap-8 text-[oklch(0.95_0_0)]/30 font-mono text-[10px] tracking-[0.2em] uppercase">
