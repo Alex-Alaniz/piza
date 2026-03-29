@@ -28,8 +28,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+  scroll-behavior: auto;
 }
 
 body {
@@ -176,7 +175,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  html { scroll-snap-type: none; }
   .font-display { letter-spacing: 0.02em; }
   .vertical-label { display: none; }
 }

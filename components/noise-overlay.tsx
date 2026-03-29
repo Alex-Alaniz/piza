@@ -2,12 +2,7 @@
 
 import { useEffect, useRef } from "react"
 
-interface AnimatedNoiseProps {
-  opacity?: number
-  className?: string
-}
-
-export default function NoiseOverlay({ opacity = 0.03, className }: AnimatedNoiseProps) {
+export default function NoiseOverlay() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -19,10 +14,11 @@ export default function NoiseOverlay({ opacity = 0.03, className }: AnimatedNois
     let animId: number
     let frame = 0
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth / 2
-      canvas.height = canvas.offsetHeight / 2
-    }
+    const observer = new ResizeObserver(([entry]) => {
+      canvas.width = Math.round(entry.contentRect.width / 2)
+      canvas.height = Math.round(entry.contentRect.height / 2)
+    })
+    observer.observe(canvas)
 
     const generateNoise = () => {
       const imageData = ctx.createImageData(canvas.width, canvas.height)
@@ -39,32 +35,30 @@ export default function NoiseOverlay({ opacity = 0.03, className }: AnimatedNois
 
     const animate = () => {
       frame++
-      if (frame % 2 === 0) generateNoise()
+      if (frame % 3 === 0) generateNoise()
       animId = requestAnimationFrame(animate)
     }
-
-    resize()
-    window.addEventListener("resize", resize)
     animate()
 
     return () => {
       cancelAnimationFrame(animId)
-      window.removeEventListener("resize", resize)
+      observer.disconnect()
     }
   }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      className={className}
+      aria-hidden="true"
       style={{
-        position: "absolute",
+        position: "fixed",
         inset: 0,
         width: "100%",
         height: "100%",
         pointerEvents: "none",
-        opacity,
+        opacity: 0.035,
         mixBlendMode: "overlay",
+        zIndex: 1000,
       }}
     />
   )

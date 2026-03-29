@@ -5,10 +5,7 @@ import SmoothScroll from "@/components/smooth-scroll"
 import NoiseOverlay from "@/components/noise-overlay"
 import AnimatedSection from "@/components/animated-section"
 import ScrambleText from "@/components/scramble-text"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(ScrollTrigger)
+import { gsap } from "@/lib/gsap"
 
 export default function PitchPage() {
   return (
@@ -20,8 +17,10 @@ export default function PitchPage() {
       {/* Slide navigation dots */}
       <SlideDots />
 
+      <NoiseOverlay />
+
       {/* Main deck */}
-      <div className="relative z-10">
+      <main className="relative z-10">
         <Nav />
         <Hero />
         <Problem />
@@ -35,7 +34,7 @@ export default function PitchPage() {
         <Proof />
         <Roadmap />
         <Closing />
-      </div>
+      </main>
     </SmoothScroll>
   )
 }
@@ -44,14 +43,16 @@ export default function PitchPage() {
 
 function SlideDots() {
   return (
-    <nav className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3">
+    <nav aria-label="Section navigation" className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3">
       {["hero","problem","shift","product","machine","blueprint","partnership","creators","piza","proof","roadmap","closing"].map((id) => (
         <a
           key={id}
           href={`#${id}`}
-          className="w-1.5 h-1.5 bg-[oklch(0.95_0_0)]/15 hover:bg-[oklch(0.7_0.2_45)] transition-colors duration-300"
-          title={id}
-        />
+          aria-label={id}
+          className="w-4 h-4 flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-[oklch(0.7_0.2_45)]"
+        >
+          <span className="w-1.5 h-1.5 bg-[oklch(0.95_0_0)]/15 hover:bg-[oklch(0.7_0.2_45)] transition-colors duration-300 block" />
+        </a>
       ))}
     </nav>
   )
@@ -61,7 +62,7 @@ function SlideDots() {
 
 function Nav() {
   return (
-    <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-[oklch(0.08_0_0)]/80 border-b border-[oklch(0.25_0_0)]">
+    <nav aria-label="Main navigation" className="fixed top-0 w-full z-50 backdrop-blur-md bg-[oklch(0.08_0_0)]/80 border-b border-[oklch(0.25_0_0)]">
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-5 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <span className="font-display text-lg tracking-[0.1em]">PIZA.GLOBAL</span>
@@ -102,8 +103,8 @@ function Hero() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="hero" className="relative h-screen overflow-y-auto flex items-center snap-start snap-always px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.03} />
+    <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center px-6 md:px-12 md:pl-28 overflow-hidden">
+
 
       {/* Vertical label */}
       <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2">
@@ -146,7 +147,7 @@ function Hero() {
 function Problem() {
   return (
     <AnimatedSection id="problem" animation="fade-up" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>01 / The Problem</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] mb-10">
@@ -187,7 +188,7 @@ function Problem() {
 function Shift() {
   return (
     <AnimatedSection id="shift" animation="slide-left" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>02 / The Shift</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
@@ -228,7 +229,7 @@ function Shift() {
 function Product() {
   return (
     <AnimatedSection id="product" animation="scale" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>03 / The Product</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
@@ -264,7 +265,7 @@ function Product() {
 function Machine() {
   return (
     <AnimatedSection id="machine" animation="slide-right" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>04 / The Machine</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-3">MORE THAN AN APP</h2>
@@ -309,7 +310,7 @@ function Machine() {
 function Blueprint() {
   return (
     <AnimatedSection id="blueprint" animation="fade-up" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>05 / The Blueprint</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
@@ -342,7 +343,7 @@ function Blueprint() {
 function Partnership() {
   return (
     <AnimatedSection id="partnership" animation="split" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>06 / The Partnership</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
@@ -384,7 +385,7 @@ function Partnership() {
 function ForCreators() {
   return (
     <AnimatedSection id="creators" animation="slide-left" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>07 / For Creators</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
@@ -413,7 +414,7 @@ function ForCreators() {
 function ForPiza() {
   return (
     <AnimatedSection id="piza" animation="slide-right" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>08 / For Piza.Global</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
@@ -442,7 +443,7 @@ function ForPiza() {
 function Proof() {
   return (
     <AnimatedSection id="proof" animation="scale" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>09 / The Proof</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-4">
@@ -482,7 +483,7 @@ function Proof() {
 function Roadmap() {
   return (
     <AnimatedSection id="roadmap" animation="fade-up" className="px-6 md:px-12 md:pl-28">
-      <NoiseOverlay opacity={0.02} />
+
       <div className="section-inner max-w-[1200px] mx-auto w-full">
         <SectionLabel data-animate>10 / The Roadmap</SectionLabel>
         <h2 data-animate className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] mb-12">
@@ -525,7 +526,7 @@ function Roadmap() {
 function Closing() {
   return (
     <AnimatedSection id="closing" animation="scale" className="px-6 md:px-12 text-center">
-      <NoiseOverlay opacity={0.03} />
+
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="font-display text-[50vw] leading-none" style={{ color: "oklch(0.7 0.2 45 / 0.02)" }}>B</span>
       </div>

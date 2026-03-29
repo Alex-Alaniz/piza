@@ -1,10 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(ScrollTrigger)
+import { gsap, ScrollTrigger } from "@/lib/gsap"
 
 interface AnimatedSectionProps {
   children: React.ReactNode
@@ -26,7 +23,6 @@ export default function AnimatedSection({
     if (!el) return
 
     const ctx = gsap.context(() => {
-      // Animate all [data-animate] children with stagger
       const items = el.querySelectorAll("[data-animate]")
       const targets = items.length > 0 ? items : [el.querySelector(".section-inner") || el]
 
@@ -51,7 +47,6 @@ export default function AnimatedSection({
         },
       })
 
-      // Parallax the section content slightly on scroll past
       const inner = el.querySelector(".section-inner")
       if (inner) {
         gsap.to(inner, {
@@ -72,7 +67,7 @@ export default function AnimatedSection({
   return (
     <section
       ref={ref}
-      className={`relative h-screen overflow-y-auto flex items-center snap-start snap-always ${className}`}
+      className={`relative min-h-screen flex items-center ${className}`}
       id={id}
     >
       {children}

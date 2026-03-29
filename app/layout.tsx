@@ -32,6 +32,12 @@ export const metadata: Metadata = {
       "The future of creator business infrastructure. 39 AI agents. Custom platforms for creators.",
     type: "website",
     url: "https://pitch.bearified.co",
+    siteName: "Piza.Global x Bearified",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PIZA.GLOBAL x BEARIFIED | Own Your Platform",
+    description: "The future of creator business infrastructure.",
   },
 }
 
