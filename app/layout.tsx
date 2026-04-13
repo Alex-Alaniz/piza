@@ -23,21 +23,21 @@ const bebas = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: "PIZA.GLOBAL x BEARIFIED | Own Your Platform",
+  title: "PIZA.GLOBAL | Talent Management",
   description:
-    "The future of creator business infrastructure. Custom platforms, AI-powered operations, and full ownership for creators. A partnership between Piza.Global and Bearified.",
+    "PIZA is a talent management company founded by Stephanie Piza — 15+ years at the intersection of Hollywood and digital. Management, Production, Branding, and Strategy for the next generation of talent.",
   openGraph: {
-    title: "PIZA.GLOBAL x BEARIFIED | Own Your Platform",
+    title: "PIZA.GLOBAL | Talent Management",
     description:
-      "The future of creator business infrastructure. 39 AI agents. Custom platforms for creators.",
+      "Management, Production, Branding, and Strategy for the next generation of talent. Founded by Stephanie Piza.",
     type: "website",
-    url: "https://pitch.bearified.co",
-    siteName: "Piza.Global x Bearified",
+    url: "https://piza.global",
+    siteName: "PIZA.GLOBAL",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PIZA.GLOBAL x BEARIFIED | Own Your Platform",
-    description: "The future of creator business infrastructure.",
+    title: "PIZA.GLOBAL | Talent Management",
+    description: "Management, Production, Branding, and Strategy for the next generation of talent.",
   },
 }
 
