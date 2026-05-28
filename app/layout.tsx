@@ -4,6 +4,12 @@ import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
+const siteUrl = new URL("https://piza.bearified.co")
+const siteTitle = "PIZA.GLOBAL | Ownership-First Talent Management"
+const siteDescription =
+  "PIZA is a next-generation representation company redefining the creator economy through ownership-first strategy, operational excellence, and cultural equity."
+const socialImage = "/piza/piza-og.png"
+
 const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -23,21 +29,42 @@ const bebas = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: "PIZA.GLOBAL | Talent Management",
-  description:
-    "PIZA is a talent management company founded by Stephanie Piza — 15+ years at the intersection of Hollywood and digital. Management, Production, Branding, and Strategy for the next generation of talent.",
+  metadataBase: siteUrl,
+  title: siteTitle,
+  description: siteDescription,
+  applicationName: "PIZA.GLOBAL",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "PIZA.GLOBAL | Talent Management",
-    description:
-      "Management, Production, Branding, and Strategy for the next generation of talent. Founded by Stephanie Piza.",
+    title: siteTitle,
+    description: siteDescription,
     type: "website",
-    url: "https://piza.global",
+    url: "/",
     siteName: "PIZA.GLOBAL",
+    locale: "en_US",
+    images: [
+      {
+        url: socialImage,
+        width: 1200,
+        height: 630,
+        alt: "PIZA.GLOBAL ownership-first talent management",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PIZA.GLOBAL | Talent Management",
-    description: "Management, Production, Branding, and Strategy for the next generation of talent.",
+    title: siteTitle,
+    description: siteDescription,
+    images: [socialImage],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/piza/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/piza/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/piza/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 }
 

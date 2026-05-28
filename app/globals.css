@@ -3,15 +3,15 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.12 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-  --accent: oklch(0.7 0.2 45);
-  --accent-foreground: oklch(0.08 0 0);
-  --border: oklch(0.25 0 0);
-  --ring: oklch(0.7 0.2 45);
+  --background: oklch(0.045 0 0);
+  --foreground: oklch(0.96 0.015 95);
+  --card: oklch(0.08 0.008 40);
+  --muted: oklch(0.22 0.006 40);
+  --muted-foreground: oklch(0.62 0.018 95);
+  --accent: oklch(0.63 0.23 28);
+  --accent-foreground: oklch(0.98 0.012 95);
+  --border: oklch(0.92 0.02 92 / 0.14);
+  --ring: oklch(0.63 0.23 28);
   --radius: 0rem;
 }
 
@@ -32,23 +32,23 @@ html {
 }
 
 body {
-  background: oklch(0.08 0 0);
-  color: oklch(0.95 0 0);
+  background: oklch(0.045 0 0);
+  color: oklch(0.96 0.015 95);
   font-family: var(--font-plex), "IBM Plex Sans", system-ui, sans-serif;
   overflow-x: hidden;
   line-height: 1.5;
 }
 
 ::selection {
-  background: oklch(0.7 0.2 45);
-  color: oklch(0.08 0 0);
+  background: oklch(0.63 0.23 28);
+  color: oklch(0.98 0.012 95);
 }
 
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: oklch(0.08 0 0); }
-::-webkit-scrollbar-thumb { background: oklch(0.7 0.2 45); }
+::-webkit-scrollbar-track { background: oklch(0.045 0 0); }
+::-webkit-scrollbar-thumb { background: oklch(0.63 0.23 28); }
 
-/* ─── Fixed grid background (bearified pattern) ── */
+/* Fixed grid background */
 .grid-bg-fixed {
   position: fixed;
   inset: 0;
@@ -61,7 +61,7 @@ body {
   z-index: 0;
 }
 
-/* ─── Scanlines ───────────────────────────────── */
+/* Scanlines */
 .scanlines {
   position: fixed;
   inset: 0;
@@ -76,61 +76,173 @@ body {
   );
 }
 
-/* ─── Display font ────────────────────────────── */
+/* Display font */
 .font-display {
   font-family: var(--font-display), "Bebas Neue", sans-serif;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
-/* ─── Section label (bearified pattern) ────────── */
+.piza-button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid oklch(0.92 0.02 92 / 0.16);
+  padding: 0 12px;
+  color: oklch(0.96 0.015 95 / 0.74);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 240ms ease, color 240ms ease, background-color 240ms ease, transform 240ms ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .piza-button {
+    padding: 0 22px;
+    font-size: 10px;
+  }
+}
+
+.piza-button:hover {
+  border-color: oklch(0.63 0.23 28 / 0.7);
+  color: oklch(0.63 0.23 28);
+  transform: translateY(-1px);
+}
+
+.piza-button-primary {
+  border-color: oklch(0.63 0.23 28 / 0.8);
+  background: oklch(0.63 0.23 28);
+  color: oklch(0.98 0.012 95);
+  box-shadow: 0 18px 58px oklch(0.42 0.2 28 / 0.22);
+}
+
+.piza-button-primary:hover {
+  background: oklch(0.56 0.21 28);
+  color: oklch(0.98 0.012 95);
+}
+
+.piza-shell a:focus-visible,
+.piza-shell button:focus-visible {
+  outline: 2px solid oklch(0.63 0.23 28);
+  outline-offset: 4px;
+}
+
+.piza-cursor,
+.piza-cursor-dot {
+  display: none;
+}
+
+@media (pointer: fine) and (min-width: 900px) {
+  .piza-shell {
+    cursor: none;
+  }
+
+  .piza-shell a,
+  .piza-shell button {
+    cursor: none;
+  }
+
+  .piza-cursor {
+    display: block;
+    position: fixed;
+    left: -18px;
+    top: -18px;
+    z-index: 1100;
+    width: 36px;
+    height: 36px;
+    border: 1px solid oklch(0.96 0.015 95 / 0.34);
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transition: width 160ms ease, height 160ms ease, left 160ms ease, top 160ms ease, border-color 160ms ease, opacity 160ms ease;
+  }
+
+  .piza-cursor.is-visible {
+    opacity: 1;
+  }
+
+  .piza-cursor.is-active {
+    left: -28px;
+    top: -28px;
+    width: 56px;
+    height: 56px;
+    border-color: oklch(0.63 0.23 28 / 0.8);
+  }
+
+  .piza-cursor-dot {
+    display: block;
+    position: fixed;
+    left: -3px;
+    top: -3px;
+    z-index: 1101;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: oklch(0.96 0.015 95 / 0.76);
+    pointer-events: none;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+
+  .piza-cursor-dot.is-visible {
+    opacity: 1;
+  }
+}
+
+/* Section label */
 .section-label {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: oklch(0.7 0.2 45);
+  color: oklch(0.63 0.23 28);
 }
 
-/* ─── Label badge ─────────────────────────────── */
+/* Label badge */
 .label-badge {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: oklch(0.7 0.2 45);
-  border: 1px solid oklch(0.7 0.2 45 / 0.25);
+  color: oklch(0.63 0.23 28);
+  border: 1px solid oklch(0.63 0.23 28 / 0.25);
   padding: 5px 14px;
   display: inline-block;
 }
 
-/* ─── Accent line ─────────────────────────────── */
+/* Accent line */
 .accent-line {
   width: 32px;
   height: 2px;
-  background: oklch(0.7 0.2 45);
+  background: oklch(0.63 0.23 28);
 }
 
-/* ─── Stat glow ───────────────────────────────── */
+/* Stat glow */
 .stat-glow {
-  text-shadow: 0 0 60px oklch(0.7 0.2 45 / 0.4);
+  text-shadow: 0 0 60px oklch(0.63 0.23 28 / 0.4);
 }
 
-/* ─── Card hover ──────────────────────────────── */
+/* Card hover */
 .card-hover {
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 .card-hover:hover {
-  border-color: oklch(0.7 0.2 45 / 0.2) !important;
-  background: oklch(0.7 0.2 45 / 0.03) !important;
+  border-color: oklch(0.63 0.23 28 / 0.2) !important;
+  background: oklch(0.63 0.23 28 / 0.03) !important;
 }
 
-/* ─── CTA buttons (bearified pattern) ─────────── */
+/* CTA buttons */
 .cta-primary {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: oklch(0.7 0.2 45);
+  background: oklch(0.63 0.23 28);
   color: oklch(0.08 0 0);
   padding: 14px 32px;
   font-family: var(--font-mono);
@@ -141,7 +253,7 @@ body {
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.cta-primary:hover { background: oklch(0.6 0.18 45); }
+.cta-primary:hover { background: oklch(0.56 0.21 28); }
 
 .cta-outline {
   display: inline-flex;
@@ -159,11 +271,11 @@ body {
   transition: all 0.3s ease;
 }
 .cta-outline:hover {
-  border-color: oklch(0.7 0.2 45);
-  color: oklch(0.7 0.2 45);
+  border-color: oklch(0.63 0.23 28);
+  color: oklch(0.63 0.23 28);
 }
 
-/* ─── Vertical label (bearified pattern) ──────── */
+/* Vertical label */
 .vertical-label {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -174,7 +286,7 @@ body {
   transform: rotate(180deg);
 }
 
-/* ─── Slide divider (fade edges) ─────────────── */
+/* Slide divider */
 .slide-divider {
   position: relative;
 }
@@ -202,6 +314,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .font-display { letter-spacing: 0.02em; }
+  .font-display { letter-spacing: 0; }
   .vertical-label { display: none; }
 }
