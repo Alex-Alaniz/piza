@@ -526,6 +526,7 @@ function ReviewOverlay() {
   const [picking, setPicking] = useState(false)
   const [note, setNote] = useState("")
   const [area, setArea] = useState<ReviewArea | null>(null)
+  const noteRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -534,6 +535,9 @@ function ReviewOverlay() {
 
   useEffect(() => {
     if (!picking) return
+
+    const previousCursor = document.body.style.cursor
+    document.body.style.cursor = "crosshair"
 
     const pickArea = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null
@@ -567,9 +571,18 @@ function ReviewOverlay() {
     window.addEventListener("click", pickArea, true)
 
     return () => {
+      document.body.style.cursor = previousCursor
       window.removeEventListener("click", pickArea, true)
     }
   }, [picking])
+
+  useEffect(() => {
+    if (!open) return
+
+    const focusTimeout = window.setTimeout(() => noteRef.current?.focus(), 50)
+
+    return () => window.clearTimeout(focusTimeout)
+  }, [open, area])
 
   if (!enabled) return null
 
@@ -600,8 +613,7 @@ Scroll position: ${area.scrollY}`
     <>
       {picking ? (
         <div
-          data-review-ui
-          className="fixed inset-0 z-[1200] cursor-crosshair bg-[oklch(0.045_0_0)]/28"
+          className="pointer-events-none fixed inset-0 z-[1200] bg-[oklch(0.045_0_0)]/28"
           aria-hidden="true"
         >
           <div className="absolute left-1/2 top-6 w-[calc(100vw-2rem)] max-w-sm -translate-x-1/2 border border-[oklch(0.63_0.23_28)]/40 bg-[oklch(0.045_0_0)] px-4 py-3 text-center font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
@@ -623,6 +635,7 @@ Scroll position: ${area.scrollY}`
         />
       ) : null}
 
+      {!picking ? (
       <div data-review-ui className="fixed bottom-5 right-5 z-[1210] flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
         {open ? (
           <div className="w-[min(360px,calc(100vw-2.5rem))] border border-[oklch(0.92_0.02_92)]/18 bg-[oklch(0.045_0_0)] p-4 shadow-[0_32px_110px_rgba(0,0,0,0.62)]">
@@ -662,6 +675,7 @@ Scroll position: ${area.scrollY}`
             ) : null}
 
             <textarea
+              ref={noteRef}
               value={note}
               onChange={(event) => setNote(event.target.value)}
               placeholder="Type feedback here..."
@@ -686,6 +700,7 @@ Scroll position: ${area.scrollY}`
           Feedback
         </button>
       </div>
+      ) : null}
     </>
   )
 }
