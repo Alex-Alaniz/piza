@@ -189,7 +189,7 @@ function Hero() {
               View what we do
             </a>
             <a href="#contact" className="piza-button">
-              Build With Us
+              Build with us
             </a>
           </div>
         </div>
@@ -219,7 +219,7 @@ function Hero() {
             style={{ filter: "brightness(1.65) saturate(1.2) drop-shadow(0 28px 64px rgba(120, 0, 0, 0.46))" }}
           />
           <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between gap-6">
-            <p className="max-w-[15rem] font-mono text-[10px] uppercase leading-5 text-[oklch(0.96_0.015_95)]/58">
+            <p className="max-w-[15rem] font-mono text-[10px] uppercase leading-5 text-[oklch(0.96_0.015_95)]/74 [text-shadow:0_1px_12px_rgba(0,0,0,0.75)]">
               360 talent architecture for culture-shaping creators.
             </p>
             <AmbientToggle />

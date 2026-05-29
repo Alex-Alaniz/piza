@@ -195,6 +195,14 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .piza-shell,
+  .piza-shell a,
+  .piza-shell button {
+    cursor: auto;
+  }
+}
+
 /* Section label */
 .section-label {
   font-family: var(--font-mono);
