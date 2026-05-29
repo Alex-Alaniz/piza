@@ -32,6 +32,17 @@ const approach = [
   "long-term legacy building",
 ]
 
+const reviewToken = "stephanie-piza-review-0529"
+
+type ReviewArea = {
+  x: number
+  y: number
+  width: number
+  height: number
+  scrollY: number
+  label: string
+}
+
 function allowsMotion() {
   return window.matchMedia("(prefers-reduced-motion: no-preference)").matches
 }
@@ -46,6 +57,7 @@ export default function Home() {
         <Hero />
         <WhatWeDo />
         <Contact />
+        <ReviewOverlay />
       </main>
     </SmoothScroll>
   )
@@ -505,6 +517,176 @@ function AmbientToggle({ className = "inline-flex" }: { className?: string }) {
       <span className={`h-2 w-2 rounded-full ${active ? "bg-[oklch(0.63_0.23_28)]" : "bg-[oklch(0.96_0.015_95)]/24"}`} />
       Sound {active ? "On" : "Off"}
     </button>
+  )
+}
+
+function ReviewOverlay() {
+  const [enabled, setEnabled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [picking, setPicking] = useState(false)
+  const [note, setNote] = useState("")
+  const [area, setArea] = useState<ReviewArea | null>(null)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setEnabled(params.get("review") === reviewToken)
+  }, [])
+
+  useEffect(() => {
+    if (!picking) return
+
+    const pickArea = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null
+      if (target?.closest("[data-review-ui]")) return
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement | null
+      const selected =
+        element?.closest("section, article, nav, footer, h1, h2, h3, p, a, img") ?? element
+      const rect = selected?.getBoundingClientRect()
+      const label =
+        selected?.getAttribute("alt") ||
+        selected?.textContent?.replace(/\s+/g, " ").trim().slice(0, 96) ||
+        selected?.tagName.toLowerCase() ||
+        "Selected area"
+
+      setArea({
+        x: Math.round(rect?.left ?? event.clientX),
+        y: Math.round(rect?.top ?? event.clientY),
+        width: Math.round(rect?.width ?? 40),
+        height: Math.round(rect?.height ?? 40),
+        scrollY: Math.round(window.scrollY),
+        label,
+      })
+      setPicking(false)
+      setOpen(true)
+    }
+
+    window.addEventListener("click", pickArea, true)
+
+    return () => {
+      window.removeEventListener("click", pickArea, true)
+    }
+  }, [picking])
+
+  if (!enabled) return null
+
+  const sendFeedback = () => {
+    const body = [
+      "Hi Alex,",
+      "",
+      "PIZA site feedback:",
+      note || "(Type note here)",
+      "",
+      area
+        ? `Selected area: ${area.label}
+Viewport box: x ${area.x}, y ${area.y}, width ${area.width}, height ${area.height}
+Scroll position: ${area.scrollY}`
+        : "Selected area: none",
+      "",
+      `Review link: ${window.location.href}`,
+    ]
+      .filter(Boolean)
+      .join("\n")
+
+    window.location.href = `mailto:alex@bearified.co?subject=${encodeURIComponent(
+      "PIZA site feedback",
+    )}&body=${encodeURIComponent(body)}`
+  }
+
+  return (
+    <>
+      {picking ? (
+        <div
+          data-review-ui
+          className="fixed inset-0 z-[1200] cursor-crosshair bg-[oklch(0.045_0_0)]/28"
+          aria-hidden="true"
+        >
+          <div className="absolute left-1/2 top-6 w-[calc(100vw-2rem)] max-w-sm -translate-x-1/2 border border-[oklch(0.63_0.23_28)]/40 bg-[oklch(0.045_0_0)] px-4 py-3 text-center font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
+            Click any area to attach it to your note
+          </div>
+        </div>
+      ) : null}
+
+      {area ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed z-[1190] border border-[oklch(0.63_0.23_28)] bg-[oklch(0.63_0.23_28)]/10 shadow-[0_0_0_9999px_rgba(0,0,0,0.16)]"
+          style={{
+            left: area.x,
+            top: area.y,
+            width: Math.max(area.width, 28),
+            height: Math.max(area.height, 28),
+          }}
+        />
+      ) : null}
+
+      <div data-review-ui className="fixed bottom-5 right-5 z-[1210] flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
+        {open ? (
+          <div className="w-[min(360px,calc(100vw-2.5rem))] border border-[oklch(0.92_0.02_92)]/18 bg-[oklch(0.045_0_0)] p-4 shadow-[0_32px_110px_rgba(0,0,0,0.62)]">
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">
+                  Private review
+                </p>
+                <p className="mt-1 text-sm text-[oklch(0.96_0.015_95)]/70">
+                  Highlight an area, type a note, and send it over.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/48 transition-colors hover:text-[oklch(0.96_0.015_95)]"
+              >
+                Close
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                setPicking(true)
+                setOpen(false)
+              }}
+              className="mb-3 h-10 w-full border border-[oklch(0.63_0.23_28)]/55 font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] transition-colors hover:bg-[oklch(0.63_0.23_28)] hover:text-[oklch(0.98_0.012_95)]"
+            >
+              {area ? "Change highlighted area" : "Highlight area"}
+            </button>
+
+            {area ? (
+              <p className="mb-3 border border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.92_0.02_92)]/[0.035] px-3 py-2 font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/58">
+                Selected: {area.label}
+              </p>
+            ) : null}
+
+            <textarea
+              value={note}
+              onChange={(event) => setNote(event.target.value)}
+              placeholder="Type feedback here..."
+              className="min-h-28 w-full resize-none border border-[oklch(0.92_0.02_92)]/14 bg-transparent p-3 text-sm leading-6 text-[oklch(0.96_0.015_95)] outline-none placeholder:text-[oklch(0.96_0.015_95)]/34 focus:border-[oklch(0.63_0.23_28)]/70"
+            />
+
+            <button
+              type="button"
+              onClick={sendFeedback}
+              className="mt-3 h-11 w-full bg-[oklch(0.63_0.23_28)] font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)] transition-colors hover:bg-[oklch(0.56_0.21_28)]"
+            >
+              Send feedback
+            </button>
+          </div>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => setOpen((current) => !current)}
+          className="h-11 border border-[oklch(0.63_0.23_28)]/70 bg-[oklch(0.63_0.23_28)] px-5 font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)] shadow-[0_18px_70px_rgba(0,0,0,0.5)] transition-colors hover:bg-[oklch(0.56_0.21_28)]"
+        >
+          Feedback
+        </button>
+      </div>
+    </>
   )
 }
 
