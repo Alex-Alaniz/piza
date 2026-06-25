@@ -1,11 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import SmoothScroll from "@/components/smooth-scroll"
 import NoiseOverlay from "@/components/noise-overlay"
 import { gsap } from "@/lib/gsap"
-
-const reviewToken = "stephanie-piza-review-0529"
 
 const philosophy = [
   "360 talent architects",
@@ -39,28 +37,8 @@ const navItems = [
   { href: "/stephanie", label: "Stephanie" },
 ]
 
-type ReviewArea = {
-  x: number
-  y: number
-  width: number
-  height: number
-  scrollY: number
-  label: string
-}
-
 function allowsMotion() {
   return window.matchMedia("(prefers-reduced-motion: no-preference)").matches
-}
-
-function useReviewSearch() {
-  const [reviewSearch, setReviewSearch] = useState("")
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    setReviewSearch(params.get("review") === reviewToken ? `?review=${reviewToken}` : "")
-  }, [])
-
-  return reviewSearch
 }
 
 function useReveal() {
@@ -102,22 +80,19 @@ function SiteShell({
       <main className="piza-shell relative min-h-screen overflow-hidden bg-[oklch(0.045_0_0)] text-[oklch(0.96_0.015_95)]">
         {showNav ? <Nav current={current} /> : null}
         {children}
-        <ReviewOverlay />
       </main>
     </SmoothScroll>
   )
 }
 
 function Nav({ current }: { current?: string }) {
-  const reviewSearch = useReviewSearch()
-
   return (
     <nav
       aria-label="Main navigation"
       className="fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.045_0_0)]/82 backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4 md:px-10">
-        <a href={`/${reviewSearch}`} aria-label="PIZA home" className="group inline-flex h-8 w-24 items-center justify-center overflow-hidden">
+        <a href="/" aria-label="PIZA home" className="group inline-flex h-8 w-24 items-center justify-center overflow-hidden">
           <img
             src="/piza/piza-inflated-transparent.png"
             alt="PIZA"
@@ -131,7 +106,7 @@ function Nav({ current }: { current?: string }) {
           {navItems.map((item) => (
             <a
               key={item.href}
-              href={`${item.href}${reviewSearch}`}
+              href={item.href}
               aria-current={current === item.label ? "page" : undefined}
               className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/55 transition-colors hover:text-[oklch(0.63_0.23_28)] aria-[current=page]:text-[oklch(0.63_0.23_28)]"
             >
@@ -145,7 +120,6 @@ function Nav({ current }: { current?: string }) {
 }
 
 export function EntryPage() {
-  const reviewSearch = useReviewSearch()
   const sectionRef = useReveal()
 
   return (
@@ -167,7 +141,7 @@ export function EntryPage() {
         <div className="relative z-10 flex min-h-svh w-full max-w-[1280px] flex-col items-center justify-between py-8 md:py-10">
           <a
             data-reveal
-            href={`/foundation${reviewSearch}`}
+            href="/foundation"
             aria-label="Enter PIZA"
             className="group mt-2 inline-flex flex-col items-center gap-5 text-center"
           >
@@ -199,7 +173,6 @@ export function EntryPage() {
 }
 
 export function FoundationPage() {
-  const reviewSearch = useReviewSearch()
   const sectionRef = useReveal()
 
   return (
@@ -232,7 +205,7 @@ export function FoundationPage() {
                 &quot;<strong className="font-semibold">Representation 2.0</strong>{" - "}creators as media companies.&quot;
               </p>
             </div>
-            <a href={`/philosophy${reviewSearch}`} className="piza-button piza-button-primary mt-9">
+            <a href="/philosophy" className="piza-button piza-button-primary mt-9">
               The Philosophy
             </a>
           </div>
@@ -243,7 +216,6 @@ export function FoundationPage() {
 }
 
 export function PhilosophyPage() {
-  const reviewSearch = useReviewSearch()
   const sectionRef = useReveal()
 
   return (
@@ -279,7 +251,7 @@ export function PhilosophyPage() {
             </p>
           </div>
 
-          <a href={`/stephanie${reviewSearch}`} className="piza-button piza-button-primary mt-10">
+          <a href="/stephanie" className="piza-button piza-button-primary mt-10">
             Stephanie
           </a>
         </div>
@@ -345,187 +317,6 @@ export function StephaniePage() {
         </div>
       </section>
     </SiteShell>
-  )
-}
-
-function ReviewOverlay() {
-  const [enabled, setEnabled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [picking, setPicking] = useState(false)
-  const [note, setNote] = useState("")
-  const [area, setArea] = useState<ReviewArea | null>(null)
-  const noteRef = useRef<HTMLTextAreaElement>(null)
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    setEnabled(params.get("review") === reviewToken)
-  }, [])
-
-  useEffect(() => {
-    if (!picking) return
-
-    const previousCursor = document.body.style.cursor
-    document.body.style.cursor = "crosshair"
-
-    const pickArea = (event: MouseEvent) => {
-      const target = event.target as HTMLElement | null
-      if (target?.closest("[data-review-ui]")) return
-
-      event.preventDefault()
-      event.stopPropagation()
-
-      const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement | null
-      const selected =
-        element?.closest("section, article, nav, footer, h1, h2, h3, p, a, img, li") ?? element
-      const rect = selected?.getBoundingClientRect()
-      const label =
-        selected?.getAttribute("alt") ||
-        selected?.textContent?.replace(/\s+/g, " ").trim().slice(0, 96) ||
-        selected?.tagName.toLowerCase() ||
-        "Selected area"
-
-      setArea({
-        x: Math.round(rect?.left ?? event.clientX),
-        y: Math.round(rect?.top ?? event.clientY),
-        width: Math.round(rect?.width ?? 40),
-        height: Math.round(rect?.height ?? 40),
-        scrollY: Math.round(window.scrollY),
-        label,
-      })
-      setPicking(false)
-      setOpen(true)
-    }
-
-    window.addEventListener("click", pickArea, true)
-
-    return () => {
-      document.body.style.cursor = previousCursor
-      window.removeEventListener("click", pickArea, true)
-    }
-  }, [picking])
-
-  useEffect(() => {
-    if (!open) return
-
-    const focusTimeout = window.setTimeout(() => noteRef.current?.focus(), 50)
-
-    return () => window.clearTimeout(focusTimeout)
-  }, [open, area])
-
-  if (!enabled) return null
-
-  const sendFeedback = () => {
-    const body = [
-      "Hi Alex,",
-      "",
-      "PIZA site feedback:",
-      note || "(Type note here)",
-      "",
-      area
-        ? `Selected area: ${area.label}
-Viewport box: x ${area.x}, y ${area.y}, width ${area.width}, height ${area.height}
-Scroll position: ${area.scrollY}`
-        : "Selected area: none",
-      "",
-      `Review link: ${window.location.href}`,
-    ].join("\n")
-
-    window.location.href = `mailto:alex@bearified.co?subject=${encodeURIComponent(
-      "PIZA site feedback",
-    )}&body=${encodeURIComponent(body)}`
-  }
-
-  return (
-    <>
-      {picking ? (
-        <div
-          className="pointer-events-none fixed inset-0 z-[1200] bg-[oklch(0.045_0_0)]/28"
-          aria-hidden="true"
-        >
-          <div className="absolute left-1/2 top-6 w-[calc(100vw-2rem)] max-w-sm -translate-x-1/2 border border-[oklch(0.63_0.23_28)]/40 bg-[oklch(0.045_0_0)] px-4 py-3 text-center font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
-            Click any area to attach it to your note
-          </div>
-        </div>
-      ) : null}
-
-      {area ? (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed z-[1190] border border-[oklch(0.63_0.23_28)] bg-[oklch(0.63_0.23_28)]/10 shadow-[0_0_0_9999px_rgba(0,0,0,0.16)]"
-          style={{
-            left: area.x,
-            top: area.y,
-            width: Math.max(area.width, 28),
-            height: Math.max(area.height, 28),
-          }}
-        />
-      ) : null}
-
-      {!picking ? (
-        <div data-review-ui className="fixed bottom-5 right-5 z-[1210] flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
-          {open ? (
-            <div className="w-[min(360px,calc(100vw-2.5rem))] border border-[oklch(0.92_0.02_92)]/18 bg-[oklch(0.045_0_0)] p-4 shadow-[0_32px_110px_rgba(0,0,0,0.62)]">
-              <div className="mb-4 flex items-start justify-between gap-4">
-                <div>
-                  <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Private review</p>
-                  <p className="mt-1 text-sm text-[oklch(0.96_0.015_95)]/70">
-                    Highlight an area, type a note, and send it over.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/48 transition-colors hover:text-[oklch(0.96_0.015_95)]"
-                >
-                  Close
-                </button>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setPicking(true)
-                  setOpen(false)
-                }}
-                className="mb-3 h-10 w-full border border-[oklch(0.63_0.23_28)]/55 font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] transition-colors hover:bg-[oklch(0.63_0.23_28)] hover:text-[oklch(0.98_0.012_95)]"
-              >
-                {area ? "Change highlighted area" : "Highlight area"}
-              </button>
-
-              {area ? (
-                <p className="mb-3 border border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.92_0.02_92)]/[0.035] px-3 py-2 font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/58">
-                  Selected: {area.label}
-                </p>
-              ) : null}
-
-              <textarea
-                ref={noteRef}
-                value={note}
-                onChange={(event) => setNote(event.target.value)}
-                placeholder="Type feedback here..."
-                className="min-h-28 w-full resize-none border border-[oklch(0.92_0.02_92)]/14 bg-transparent p-3 text-sm leading-6 text-[oklch(0.96_0.015_95)] outline-none placeholder:text-[oklch(0.96_0.015_95)]/34 focus:border-[oklch(0.63_0.23_28)]/70"
-              />
-
-              <button
-                type="button"
-                onClick={sendFeedback}
-                className="mt-3 h-11 w-full bg-[oklch(0.63_0.23_28)] font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)] transition-colors hover:bg-[oklch(0.56_0.21_28)]"
-              >
-                Send feedback
-              </button>
-            </div>
-          ) : null}
-
-          <button
-            type="button"
-            onClick={() => setOpen((current) => !current)}
-            className="h-11 border border-[oklch(0.63_0.23_28)]/70 bg-[oklch(0.63_0.23_28)] px-5 font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)] shadow-[0_18px_70px_rgba(0,0,0,0.5)] transition-colors hover:bg-[oklch(0.56_0.21_28)]"
-          >
-            Feedback
-          </button>
-        </div>
-      ) : null}
-    </>
   )
 }
 
