@@ -1,13 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google"
+import { IBM_Plex_Sans, IBM_Plex_Mono, Oswald } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 const siteUrl = new URL("https://piza.bearified.co")
 const siteTitle = "PIZA.GLOBAL | Ownership-First Talent Management"
 const siteDescription =
-  "PIZA is a next-generation representation company redefining the creator economy through ownership-first strategy, operational excellence, and cultural equity."
+  "PIZA is a next-generation representation company built on ownership, infrastructure, and cultural equity for creators, designers, artists, and cultural architects."
 const socialImage = "/piza/piza-og.png"
 
 const plexSans = IBM_Plex_Sans({
@@ -22,9 +22,9 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-mono",
 })
 
-const bebas = Bebas_Neue({
+const oswald = Oswald({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-display",
 })
 
@@ -76,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${plexSans.variable} ${plexMono.variable} ${bebas.variable} antialiased`}
+        className={`${plexSans.variable} ${plexMono.variable} ${oswald.variable} antialiased`}
       >
         {children}
         <Analytics />

@@ -6,7 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/options", "/options/", "/pitch", "/v2", "/v3"],
       },
     ],
     sitemap: "https://piza.bearified.co/sitemap.xml",

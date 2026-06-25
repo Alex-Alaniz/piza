@@ -1,12 +1,12 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## What This Is
 
 PIZA.GLOBAL — the talent-management company website for Stephanie Piza. Next.js 16 App Router project bootstrapped via v0, deployed on Vercel at **https://piza.bearified.co**. The brief (from the client): a short, exclusive, cinematic "velvet rope" landing — black/near-black base with a single **PIZA red** accent — for an ownership-first creator-representation company.
 
-> `AGENTS.md` is a byte-for-byte mirror of this file addressed to Codex. If you change architecture facts here, update `AGENTS.md` too so the two don't drift.
+> `CLAUDE.md` is a byte-for-byte mirror of this file addressed to Claude Code. If you change architecture facts here, update `CLAUDE.md` too so the two don't drift.
 
 ## Commands
 

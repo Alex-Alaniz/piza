@@ -18,7 +18,7 @@
 @theme inline {
   --font-sans: var(--font-plex), "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: var(--font-mono, "IBM Plex Mono"), monospace;
-  --font-display: var(--font-display, "Bebas Neue"), sans-serif;
+  --font-display: var(--font-display, "Oswald"), sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -78,9 +78,8 @@ body {
 
 /* Display font */
 .font-display {
-  font-family: var(--font-display), "Bebas Neue", sans-serif;
+  font-family: var(--font-display), "Oswald", sans-serif;
   letter-spacing: 0;
-  text-transform: uppercase;
 }
 
 .piza-button {
@@ -203,125 +202,6 @@ body {
   }
 }
 
-/* Section label */
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: oklch(0.63 0.23 28);
-}
-
-/* Label badge */
-.label-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: oklch(0.63 0.23 28);
-  border: 1px solid oklch(0.63 0.23 28 / 0.25);
-  padding: 5px 14px;
-  display: inline-block;
-}
-
-/* Accent line */
-.accent-line {
-  width: 32px;
-  height: 2px;
-  background: oklch(0.63 0.23 28);
-}
-
-/* Stat glow */
-.stat-glow {
-  text-shadow: 0 0 60px oklch(0.63 0.23 28 / 0.4);
-}
-
-/* Card hover */
-.card-hover {
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-.card-hover:hover {
-  border-color: oklch(0.63 0.23 28 / 0.2) !important;
-  background: oklch(0.63 0.23 28 / 0.03) !important;
-}
-
-/* CTA buttons */
-.cta-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: oklch(0.63 0.23 28);
-  color: oklch(0.08 0 0);
-  padding: 14px 32px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.cta-primary:hover { background: oklch(0.56 0.21 28); }
-
-.cta-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid oklch(0.95 0 0 / 0.15);
-  color: oklch(0.95 0 0);
-  padding: 14px 32px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.cta-outline:hover {
-  border-color: oklch(0.63 0.23 28);
-  color: oklch(0.63 0.23 28);
-}
-
-/* Vertical label */
-.vertical-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: oklch(0.95 0 0 / 0.15);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
-
-/* Slide divider */
-.slide-divider {
-  position: relative;
-}
-.slide-divider::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, oklch(0.05 0 0));
-  pointer-events: none;
-  z-index: 5;
-}
-.slide-divider::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to top, transparent, oklch(0.05 0 0));
-  pointer-events: none;
-  z-index: 5;
-}
-
 @media (max-width: 768px) {
   .font-display { letter-spacing: 0; }
-  .vertical-label { display: none; }
 }

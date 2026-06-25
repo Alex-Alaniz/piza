@@ -1,0 +1,577 @@
+"use client"
+
+import { useEffect, useRef, useState } from "react"
+import SmoothScroll from "@/components/smooth-scroll"
+import NoiseOverlay from "@/components/noise-overlay"
+import { gsap } from "@/lib/gsap"
+
+const reviewToken = "stephanie-piza-review-0529"
+
+const philosophy = [
+  "360 talent architects",
+  "creator IP",
+  "brand equity",
+  "long term legacy building",
+  "culture positioning",
+]
+
+const bioParagraphs = [
+  "Stephanie Piza is one of the defining forces behind the evolution of the creator economy, recognized for transforming digital talent into enterprise-level brands, cultural powerhouses, and long-term businesses.",
+  "With over 15 years of experience spanning entertainment, media, luxury partnerships, and digital innovation, Piza has built a reputation as one of the most influential dealmakers shaping the future of modern representation. Her career has been rooted in a singular belief: creators are not marketing channels; they are companies.",
+  "Before launching PIZA, Stephanie served as Head of Emerging & Interactive Talent at M88, where she helped expand the firm's digital footprint while negotiating high-value partnerships that bridged creators with Fortune 500 brands, fashion houses, and global platforms.",
+  "Earlier in her career, Piza co-founded UNCMMN alongside Charles King, creating one of the first female-founded management companies focused on culturally influential digital voices. The company was later strategically folded into M88, solidifying Piza's reputation as both a builder and visionary within the creator economy.",
+  "Named to Variety's New Leaders List in 2021, Stephanie has consistently championed underrepresented voices throughout her career. As a proud Colombiana and one of the first prominent Latina executives to make a significant impact in digital and emerging media, she has dedicated her work to creating infrastructure, access, and ownership opportunities for historically excluded talent.",
+  "She began her career at Creative Artists Agency in digital talent and brand partnerships before going on to architect groundbreaking creator-led business models across entertainment, fashion, media, and technology.",
+  "Today, Stephanie launched PIZA as a next-generation representation company built on ownership, infrastructure, and cultural equity. Under her leadership, PIZA represents a new era of talent representation: one where culture is leveraged not just for visibility, but for legacy, ownership, and long-term enterprise growth.",
+]
+
+const careerHighlights = [
+  "Closed seven-figure global brand partnerships and multi-platform deals",
+  "Structured equity-forward partnerships and ownership models",
+  "Developed creator-led product and IP strategies",
+  "Built lean, high-performance management teams",
+  "Advised talent on long-term ownership, scalability, and IP retention",
+]
+
+const navItems = [
+  { href: "/foundation", label: "Foundation" },
+  { href: "/philosophy", label: "Philosophy" },
+  { href: "/stephanie", label: "Stephanie" },
+]
+
+type ReviewArea = {
+  x: number
+  y: number
+  width: number
+  height: number
+  scrollY: number
+  label: string
+}
+
+function allowsMotion() {
+  return window.matchMedia("(prefers-reduced-motion: no-preference)").matches
+}
+
+function useReviewSearch() {
+  const [reviewSearch, setReviewSearch] = useState("")
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setReviewSearch(params.get("review") === reviewToken ? `?review=${reviewToken}` : "")
+  }, [])
+
+  return reviewSearch
+}
+
+function useReveal() {
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (!ref.current) return
+    if (!allowsMotion()) return
+
+    const ctx = gsap.context(() => {
+      gsap.from("[data-reveal]", {
+        opacity: 0,
+        y: 22,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.08,
+      })
+    }, ref)
+
+    return () => ctx.revert()
+  }, [])
+
+  return ref
+}
+
+function SiteShell({
+  children,
+  current,
+  showNav = true,
+}: {
+  children: React.ReactNode
+  current?: string
+  showNav?: boolean
+}) {
+  return (
+    <SmoothScroll>
+      <NoiseOverlay />
+      <CustomCursor />
+      <main className="piza-shell relative min-h-screen overflow-hidden bg-[oklch(0.045_0_0)] text-[oklch(0.96_0.015_95)]">
+        {showNav ? <Nav current={current} /> : null}
+        {children}
+        <ReviewOverlay />
+      </main>
+    </SmoothScroll>
+  )
+}
+
+function Nav({ current }: { current?: string }) {
+  const reviewSearch = useReviewSearch()
+
+  return (
+    <nav
+      aria-label="Main navigation"
+      className="fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.045_0_0)]/82 backdrop-blur-xl"
+    >
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4 md:px-10">
+        <a href={`/${reviewSearch}`} aria-label="PIZA home" className="group inline-flex h-8 w-24 items-center justify-center overflow-hidden">
+          <img
+            src="/piza/piza-inflated-transparent.png"
+            alt="PIZA"
+            width={2000}
+            height={2000}
+            className="h-full w-full scale-[3.8] object-contain transition-opacity duration-300 group-hover:opacity-80"
+            style={{ filter: "brightness(1.65) saturate(1.25)" }}
+          />
+        </a>
+        <div className="flex items-center gap-3 sm:gap-6">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={`${item.href}${reviewSearch}`}
+              aria-current={current === item.label ? "page" : undefined}
+              className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/55 transition-colors hover:text-[oklch(0.63_0.23_28)] aria-[current=page]:text-[oklch(0.63_0.23_28)]"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export function EntryPage() {
+  const reviewSearch = useReviewSearch()
+  const sectionRef = useReveal()
+
+  return (
+    <SiteShell showNav={false}>
+      <section ref={sectionRef} className="relative flex min-h-svh items-center justify-center overflow-hidden px-5">
+        <div className="absolute inset-0">
+          <img
+            src="/piza/cigar-hero.jpg"
+            alt="PIZA cigar detail with hand, jewelry, and red nails"
+            width={1320}
+            height={1649}
+            fetchPriority="high"
+            className="h-full w-full object-cover object-[56%_50%] brightness-105 contrast-110 saturate-[.92]"
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_42%,transparent_0%,oklch(0.045_0_0/.08)_32%,oklch(0.045_0_0/.82)_72%,oklch(0.045_0_0)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.045_0_0/.2)_0%,transparent_32%,oklch(0.045_0_0/.76)_100%)]" />
+        </div>
+
+        <div className="relative z-10 flex min-h-svh w-full max-w-[1280px] flex-col items-center justify-between py-8 md:py-10">
+          <a
+            data-reveal
+            href={`/foundation${reviewSearch}`}
+            aria-label="Enter PIZA"
+            className="group mt-2 inline-flex flex-col items-center gap-5 text-center"
+          >
+            <img
+              src="/piza/piza-inflated-transparent.png"
+              alt="PIZA"
+              width={2000}
+              height={2000}
+              className="w-[min(68vw,440px)] object-contain drop-shadow-[0_34px_90px_rgba(130,0,0,0.52)] transition-transform duration-500 group-hover:scale-[1.025]"
+              style={{ filter: "brightness(1.72) saturate(1.24)" }}
+            />
+            <span className="font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)]/88 [text-shadow:0_2px_18px_rgba(0,0,0,0.92)] transition-colors group-hover:text-[oklch(0.63_0.23_28)]">
+              Click PIZA logo to enter
+            </span>
+          </a>
+
+          <div data-reveal className="mb-4 grid w-full gap-4 border-t border-[oklch(0.92_0.02_92)]/14 pt-5 md:grid-cols-[1fr_auto] md:items-end">
+            <p className="max-w-xl text-sm leading-7 text-[oklch(0.96_0.015_95)]/64 md:text-base">
+              A new model focused on ownership, equity, and long-term value.
+            </p>
+            <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">
+              PIZA.GLOBAL
+            </p>
+          </div>
+        </div>
+      </section>
+    </SiteShell>
+  )
+}
+
+export function FoundationPage() {
+  const reviewSearch = useReviewSearch()
+  const sectionRef = useReveal()
+
+  return (
+    <SiteShell current="Foundation">
+      <section ref={sectionRef} className="relative min-h-svh px-5 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,oklch(0.18_0.08_28/.28),transparent_34%),linear-gradient(180deg,oklch(0.045_0_0),oklch(0.06_0.006_40))]" />
+        <div className="relative z-10 mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
+          <div data-reveal>
+            <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Page 02</p>
+            <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.9rem,6.6vw,6.9rem)] font-light leading-[.98] text-[oklch(0.98_0.012_95)]">
+              <strong className="font-semibold">A company built</strong> for people that hold culture.
+              <span className="mt-4 block text-[oklch(0.96_0.015_95)]/72">
+                We build leverage for the people shaping what&apos;s next.
+              </span>
+            </h1>
+          </div>
+
+          <div data-reveal className="border-l border-[oklch(0.63_0.23_28)]/70 pl-6 md:pl-8">
+            <h2 className="font-display text-4xl font-light text-[oklch(0.98_0.012_95)] md:text-6xl">
+              The Foundation
+            </h2>
+            <div className="mt-7 space-y-5 text-base leading-8 text-[oklch(0.96_0.015_95)]/66">
+              <p>
+                PIZA is a next-generation representation company built on <strong className="font-semibold text-[oklch(0.98_0.012_95)]">ownership</strong>, infrastructure, and cultural equity.
+              </p>
+              <p>
+                We help culture-shaping talent move beyond visibility into enduring businesses across brand partnerships, intellectual property, equity, and long-term enterprise value.
+              </p>
+              <p className="text-[oklch(0.96_0.015_95)]/82">
+                &quot;<strong className="font-semibold">Representation 2.0</strong>{" - "}creators as media companies.&quot;
+              </p>
+            </div>
+            <a href={`/philosophy${reviewSearch}`} className="piza-button piza-button-primary mt-9">
+              The Philosophy
+            </a>
+          </div>
+        </div>
+      </section>
+    </SiteShell>
+  )
+}
+
+export function PhilosophyPage() {
+  const reviewSearch = useReviewSearch()
+  const sectionRef = useReveal()
+
+  return (
+    <SiteShell current="Philosophy">
+      <section ref={sectionRef} className="relative min-h-svh overflow-hidden px-5 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
+        <div className="absolute inset-0 bg-[oklch(0.055_0.004_40)]" />
+        <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(to_right,oklch(0.92_0.02_92/.18)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.92_0.02_92/.12)_1px,transparent_1px)] [background-size:96px_96px]" />
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div data-reveal className="max-w-4xl">
+            <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Page 03</p>
+            <h1 className="mt-6 font-display text-[clamp(4rem,9.5vw,9rem)] font-light leading-[.88] text-[oklch(0.98_0.012_95)]">
+              The <strong className="font-semibold">Philosophy</strong>
+            </h1>
+          </div>
+
+          <div data-reveal className="mt-10 grid gap-px border border-[oklch(0.92_0.02_92)]/12 bg-[oklch(0.92_0.02_92)]/12 md:grid-cols-5">
+            {philosophy.map((item) => (
+              <article key={item} className="min-h-[160px] bg-[oklch(0.045_0_0)] p-6 transition-colors duration-300 hover:bg-[oklch(0.09_0.02_28)] md:p-7">
+                <div className="mb-7 h-px w-10 bg-[oklch(0.63_0.23_28)]" />
+                <h2 className="font-display text-3xl font-light leading-none text-[oklch(0.98_0.012_95)] md:text-4xl">
+                  {item}
+                </h2>
+              </article>
+            ))}
+          </div>
+
+          <div data-reveal className="mt-10 grid gap-8 border-y border-[oklch(0.92_0.02_92)]/12 py-7 md:grid-cols-[.8fr_1.2fr] md:items-center">
+            <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/50">
+              The people we back
+            </p>
+            <p className="font-display text-4xl font-light leading-[1.02] text-[oklch(0.96_0.015_95)]/86 md:text-6xl">
+              Creators, designers, artists &amp; cultural architects
+            </p>
+          </div>
+
+          <a href={`/stephanie${reviewSearch}`} className="piza-button piza-button-primary mt-10">
+            Stephanie
+          </a>
+        </div>
+      </section>
+    </SiteShell>
+  )
+}
+
+export function StephaniePage() {
+  const sectionRef = useReveal()
+
+  return (
+    <SiteShell current="Stephanie">
+      <section ref={sectionRef} className="relative min-h-svh px-5 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.045_0_0),oklch(0.028_0_0))]" />
+        <div className="relative z-10 mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[.78fr_1.22fr]">
+          <aside data-reveal className="lg:sticky lg:top-28 lg:self-start">
+            <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Page 04</p>
+            <h1 className="mt-6 font-display text-[clamp(4rem,9vw,9rem)] font-light leading-[.88] text-[oklch(0.98_0.012_95)]">
+              Stephanie <strong className="font-semibold">Piza</strong>
+            </h1>
+            <div className="mt-10 space-y-5 border-l border-[oklch(0.63_0.23_28)]/70 pl-6">
+              <a href="https://instagram.com/stephanie_piza" target="_blank" rel="noopener noreferrer" className="block transition-colors hover:text-[oklch(0.63_0.23_28)]">
+                <span className="block font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">Stephanie</span>
+                <span className="mt-1 block text-xl">@stephanie_piza</span>
+              </a>
+              <a href="https://instagram.com/Piza.global" target="_blank" rel="noopener noreferrer" className="block transition-colors hover:text-[oklch(0.63_0.23_28)]">
+                <span className="block font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">PIZA</span>
+                <span className="mt-1 block text-xl">@Piza.global</span>
+              </a>
+              <a href="mailto:Stephanie@Piza.global" className="block transition-colors hover:text-[oklch(0.63_0.23_28)]">
+                <span className="block font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">Email</span>
+                <span className="mt-1 block text-xl">Stephanie@Piza.global</span>
+              </a>
+            </div>
+          </aside>
+
+          <div data-reveal className="space-y-7 text-base leading-8 text-[oklch(0.96_0.015_95)]/68 md:text-lg md:leading-9">
+            {bioParagraphs.map((paragraph, index) => (
+              <p key={paragraph} className={index === 0 ? "text-[oklch(0.96_0.015_95)]/88" : ""}>
+                {paragraph}
+              </p>
+            ))}
+
+            <div className="border-y border-[oklch(0.92_0.02_92)]/12 py-8">
+              <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Throughout her career</p>
+              <ul className="mt-6 grid gap-4 md:grid-cols-2">
+                {careerHighlights.map((item) => (
+                  <li key={item} className="border-l border-[oklch(0.92_0.02_92)]/14 pl-4 text-sm leading-7 text-[oklch(0.96_0.015_95)]/66">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <footer className="flex flex-wrap items-center justify-between gap-4 pt-2">
+              <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/42">PIZA.GLOBAL</p>
+              <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/42">
+                Ownership / Infrastructure / Cultural Equity
+              </p>
+            </footer>
+          </div>
+        </div>
+      </section>
+    </SiteShell>
+  )
+}
+
+function ReviewOverlay() {
+  const [enabled, setEnabled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [picking, setPicking] = useState(false)
+  const [note, setNote] = useState("")
+  const [area, setArea] = useState<ReviewArea | null>(null)
+  const noteRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setEnabled(params.get("review") === reviewToken)
+  }, [])
+
+  useEffect(() => {
+    if (!picking) return
+
+    const previousCursor = document.body.style.cursor
+    document.body.style.cursor = "crosshair"
+
+    const pickArea = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null
+      if (target?.closest("[data-review-ui]")) return
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      const element = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement | null
+      const selected =
+        element?.closest("section, article, nav, footer, h1, h2, h3, p, a, img, li") ?? element
+      const rect = selected?.getBoundingClientRect()
+      const label =
+        selected?.getAttribute("alt") ||
+        selected?.textContent?.replace(/\s+/g, " ").trim().slice(0, 96) ||
+        selected?.tagName.toLowerCase() ||
+        "Selected area"
+
+      setArea({
+        x: Math.round(rect?.left ?? event.clientX),
+        y: Math.round(rect?.top ?? event.clientY),
+        width: Math.round(rect?.width ?? 40),
+        height: Math.round(rect?.height ?? 40),
+        scrollY: Math.round(window.scrollY),
+        label,
+      })
+      setPicking(false)
+      setOpen(true)
+    }
+
+    window.addEventListener("click", pickArea, true)
+
+    return () => {
+      document.body.style.cursor = previousCursor
+      window.removeEventListener("click", pickArea, true)
+    }
+  }, [picking])
+
+  useEffect(() => {
+    if (!open) return
+
+    const focusTimeout = window.setTimeout(() => noteRef.current?.focus(), 50)
+
+    return () => window.clearTimeout(focusTimeout)
+  }, [open, area])
+
+  if (!enabled) return null
+
+  const sendFeedback = () => {
+    const body = [
+      "Hi Alex,",
+      "",
+      "PIZA site feedback:",
+      note || "(Type note here)",
+      "",
+      area
+        ? `Selected area: ${area.label}
+Viewport box: x ${area.x}, y ${area.y}, width ${area.width}, height ${area.height}
+Scroll position: ${area.scrollY}`
+        : "Selected area: none",
+      "",
+      `Review link: ${window.location.href}`,
+    ].join("\n")
+
+    window.location.href = `mailto:alex@bearified.co?subject=${encodeURIComponent(
+      "PIZA site feedback",
+    )}&body=${encodeURIComponent(body)}`
+  }
+
+  return (
+    <>
+      {picking ? (
+        <div
+          className="pointer-events-none fixed inset-0 z-[1200] bg-[oklch(0.045_0_0)]/28"
+          aria-hidden="true"
+        >
+          <div className="absolute left-1/2 top-6 w-[calc(100vw-2rem)] max-w-sm -translate-x-1/2 border border-[oklch(0.63_0.23_28)]/40 bg-[oklch(0.045_0_0)] px-4 py-3 text-center font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
+            Click any area to attach it to your note
+          </div>
+        </div>
+      ) : null}
+
+      {area ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed z-[1190] border border-[oklch(0.63_0.23_28)] bg-[oklch(0.63_0.23_28)]/10 shadow-[0_0_0_9999px_rgba(0,0,0,0.16)]"
+          style={{
+            left: area.x,
+            top: area.y,
+            width: Math.max(area.width, 28),
+            height: Math.max(area.height, 28),
+          }}
+        />
+      ) : null}
+
+      {!picking ? (
+        <div data-review-ui className="fixed bottom-5 right-5 z-[1210] flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
+          {open ? (
+            <div className="w-[min(360px,calc(100vw-2.5rem))] border border-[oklch(0.92_0.02_92)]/18 bg-[oklch(0.045_0_0)] p-4 shadow-[0_32px_110px_rgba(0,0,0,0.62)]">
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Private review</p>
+                  <p className="mt-1 text-sm text-[oklch(0.96_0.015_95)]/70">
+                    Highlight an area, type a note, and send it over.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/48 transition-colors hover:text-[oklch(0.96_0.015_95)]"
+                >
+                  Close
+                </button>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setPicking(true)
+                  setOpen(false)
+                }}
+                className="mb-3 h-10 w-full border border-[oklch(0.63_0.23_28)]/55 font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)] transition-colors hover:bg-[oklch(0.63_0.23_28)] hover:text-[oklch(0.98_0.012_95)]"
+              >
+                {area ? "Change highlighted area" : "Highlight area"}
+              </button>
+
+              {area ? (
+                <p className="mb-3 border border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.92_0.02_92)]/[0.035] px-3 py-2 font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/58">
+                  Selected: {area.label}
+                </p>
+              ) : null}
+
+              <textarea
+                ref={noteRef}
+                value={note}
+                onChange={(event) => setNote(event.target.value)}
+                placeholder="Type feedback here..."
+                className="min-h-28 w-full resize-none border border-[oklch(0.92_0.02_92)]/14 bg-transparent p-3 text-sm leading-6 text-[oklch(0.96_0.015_95)] outline-none placeholder:text-[oklch(0.96_0.015_95)]/34 focus:border-[oklch(0.63_0.23_28)]/70"
+              />
+
+              <button
+                type="button"
+                onClick={sendFeedback}
+                className="mt-3 h-11 w-full bg-[oklch(0.63_0.23_28)] font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)] transition-colors hover:bg-[oklch(0.56_0.21_28)]"
+              >
+                Send feedback
+              </button>
+            </div>
+          ) : null}
+
+          <button
+            type="button"
+            onClick={() => setOpen((current) => !current)}
+            className="h-11 border border-[oklch(0.63_0.23_28)]/70 bg-[oklch(0.63_0.23_28)] px-5 font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)] shadow-[0_18px_70px_rgba(0,0,0,0.5)] transition-colors hover:bg-[oklch(0.56_0.21_28)]"
+          >
+            Feedback
+          </button>
+        </div>
+      ) : null}
+    </>
+  )
+}
+
+function CustomCursor() {
+  const cursorRef = useRef<HTMLDivElement>(null)
+  const dotRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const cursor = cursorRef.current
+    const dot = dotRef.current
+    if (!cursor || !dot) return
+    if (!allowsMotion()) return
+
+    const cursorX = gsap.quickTo(cursor, "x", { duration: 0.28, ease: "power3.out" })
+    const cursorY = gsap.quickTo(cursor, "y", { duration: 0.28, ease: "power3.out" })
+    const dotX = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power2.out" })
+    const dotY = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power2.out" })
+
+    const move = (event: PointerEvent) => {
+      cursor.classList.add("is-visible")
+      dot.classList.add("is-visible")
+      cursorX(event.clientX)
+      cursorY(event.clientY)
+      dotX(event.clientX)
+      dotY(event.clientY)
+    }
+
+    const activate = (event: PointerEvent) => {
+      const target = event.target as HTMLElement
+      const interactive = target.closest("a, button")
+      cursor.classList.toggle("is-active", Boolean(interactive))
+    }
+
+    window.addEventListener("pointermove", move)
+    window.addEventListener("pointerover", activate)
+
+    return () => {
+      window.removeEventListener("pointermove", move)
+      window.removeEventListener("pointerover", activate)
+    }
+  }, [])
+
+  return (
+    <>
+      <div ref={cursorRef} className="piza-cursor" aria-hidden="true" />
+      <div ref={dotRef} className="piza-cursor-dot" aria-hidden="true" />
+    </>
+  )
+}
