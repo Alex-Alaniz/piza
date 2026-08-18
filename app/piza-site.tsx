@@ -7,7 +7,7 @@ import { gsap } from "@/lib/gsap"
 
 const philosophy = [
   "360 talent architects",
-  "creator IP",
+  "creator ecosystems",
   "brand equity",
   "long term legacy building",
   "culture positioning",
@@ -15,20 +15,12 @@ const philosophy = [
 
 const bioParagraphs = [
   "Stephanie Piza is one of the defining forces behind the evolution of the creator economy, recognized for transforming digital talent into enterprise-level brands, cultural powerhouses, and long-term businesses.",
-  "With over 15 years of experience spanning entertainment, media, luxury partnerships, and digital innovation, Piza has built a reputation as one of the most influential dealmakers shaping the future of modern representation. Her career has been rooted in a singular belief: creators are not marketing channels; they are companies.",
+  "With over 15 years of experience spanning entertainment, media, luxury partnerships, and digital innovation, Piza has built a reputation as one of the most influential dealmakers shaping the future of modern representation. Her career has been rooted in a singular belief: creators are not just marketing channels; they are enterprises.",
   "Before launching PIZA, Stephanie served as Head of Emerging & Interactive Talent at M88, where she helped expand the firm's digital footprint while negotiating high-value partnerships that bridged creators with Fortune 500 brands, fashion houses, and global platforms.",
   "Earlier in her career, Piza co-founded UNCMMN alongside Charles King, creating one of the first female-founded management companies focused on culturally influential digital voices. The company was later strategically folded into M88, solidifying Piza's reputation as both a builder and visionary within the creator economy.",
   "Named to Variety's New Leaders List in 2021, Stephanie has consistently championed underrepresented voices throughout her career. As a proud Colombiana and one of the first prominent Latina executives to make a significant impact in digital and emerging media, she has dedicated her work to creating infrastructure, access, and ownership opportunities for historically excluded talent.",
   "She began her career at Creative Artists Agency in digital talent and brand partnerships before going on to architect groundbreaking creator-led business models across entertainment, fashion, media, and technology.",
   "Today, Stephanie launched PIZA as a next-generation representation company built on ownership, infrastructure, and cultural equity. Under her leadership, PIZA represents a new era of talent representation: one where culture is leveraged not just for visibility, but for legacy, ownership, and long-term enterprise growth.",
-]
-
-const careerHighlights = [
-  "Closed seven-figure global brand partnerships and multi-platform deals",
-  "Structured equity-forward partnerships and ownership models",
-  "Developed creator-led product and IP strategies",
-  "Built lean, high-performance management teams",
-  "Advised talent on long-term ownership, scalability, and IP retention",
 ]
 
 const navItems = [
@@ -99,7 +91,7 @@ function Nav({ current }: { current?: string }) {
             width={2000}
             height={2000}
             className="h-full w-full scale-[3.8] object-contain transition-opacity duration-300 group-hover:opacity-80"
-            style={{ filter: "brightness(1.65) saturate(1.25)" }}
+            style={{ filter: "brightness(1.22) saturate(1.12)" }}
           />
         </a>
         <div className="flex items-center gap-3 sm:gap-6">
@@ -151,7 +143,7 @@ export function EntryPage() {
               width={2000}
               height={2000}
               className="w-[min(68vw,440px)] object-contain drop-shadow-[0_34px_90px_rgba(130,0,0,0.52)] transition-transform duration-500 group-hover:scale-[1.025]"
-              style={{ filter: "brightness(1.72) saturate(1.24)" }}
+              style={{ filter: "brightness(1.28) saturate(1.12)" }}
             />
             <span className="font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)]/88 [text-shadow:0_2px_18px_rgba(0,0,0,0.92)] transition-colors group-hover:text-[oklch(0.63_0.23_28)]">
               Click PIZA logo to enter
@@ -295,17 +287,6 @@ export function StephaniePage() {
                 {paragraph}
               </p>
             ))}
-
-            <div className="border-y border-[oklch(0.92_0.02_92)]/12 py-8">
-              <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Throughout her career</p>
-              <ul className="mt-6 grid gap-4 md:grid-cols-2">
-                {careerHighlights.map((item) => (
-                  <li key={item} className="border-l border-[oklch(0.92_0.02_92)]/14 pl-4 text-sm leading-7 text-[oklch(0.96_0.015_95)]/66">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             <footer className="flex flex-wrap items-center justify-between gap-4 pt-2">
               <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/42">PIZA.GLOBAL</p>
