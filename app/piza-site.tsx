@@ -6,11 +6,11 @@ import NoiseOverlay from "@/components/noise-overlay"
 import { gsap } from "@/lib/gsap"
 
 const philosophy = [
-  "360 talent architects",
-  "creator ecosystems",
-  "brand equity",
-  "long term legacy building",
-  "culture positioning",
+  "360 Talent Architects",
+  "Creator Ecosystems",
+  "Brand Equity",
+  "Long Term Legacy Building",
+  "Culture Positioning",
 ]
 
 const bioParagraphs = [
@@ -26,7 +26,7 @@ const bioParagraphs = [
 const navItems = [
   { href: "/foundation", label: "Foundation" },
   { href: "/philosophy", label: "Philosophy" },
-  { href: "/stephanie", label: "Stephanie" },
+  { href: "/stephanie", label: "Our Team" },
 ]
 
 function allowsMotion() {
@@ -244,7 +244,7 @@ export function PhilosophyPage() {
           </div>
 
           <a href="/stephanie" className="piza-button piza-button-primary mt-10">
-            Stephanie
+            Our Team
           </a>
         </div>
       </section>
@@ -256,7 +256,7 @@ export function StephaniePage() {
   const sectionRef = useReveal()
 
   return (
-    <SiteShell current="Stephanie">
+    <SiteShell current="Our Team">
       <section ref={sectionRef} className="relative min-h-svh px-5 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.045_0_0),oklch(0.028_0_0))]" />
         <div className="relative z-10 mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[.78fr_1.22fr]">
