@@ -1,21 +1,40 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import SmoothScroll from "@/components/smooth-scroll"
 import NoiseOverlay from "@/components/noise-overlay"
 import { gsap } from "@/lib/gsap"
 
+// Service blurbs are agency-drafted placeholders pending client-approved copy.
 const philosophy = [
-  "360 talent architects",
-  "creator IP",
-  "brand equity",
-  "long term legacy building",
-  "culture positioning",
+  {
+    title: "360 Talent Architects",
+    blurb: "Full-spectrum representation: deals, brand, content, and business strategy built around each talent.",
+  },
+  {
+    title: "Creator Ecosystems",
+    blurb: "Products, platforms, and partnerships that turn an audience into a durable economy.",
+  },
+  {
+    title: "Brand Equity",
+    blurb: "Positioning and partnerships that compound the value of a name over time.",
+  },
+  {
+    title: "Long Term Legacy Building",
+    blurb: "Ownership-first structures designed for decades, not campaign cycles.",
+  },
+  {
+    title: "Culture Positioning",
+    blurb: "Placing talent at the center of the cultural moments that matter.",
+  },
 ]
+
+const CONTACT_EMAIL = "info@piza.global"
+const IG_URL = "https://instagram.com/Piza.global"
 
 const bioParagraphs = [
   "Stephanie Piza is one of the defining forces behind the evolution of the creator economy, recognized for transforming digital talent into enterprise-level brands, cultural powerhouses, and long-term businesses.",
-  "With over 15 years of experience spanning entertainment, media, luxury partnerships, and digital innovation, Piza has built a reputation as one of the most influential dealmakers shaping the future of modern representation. Her career has been rooted in a singular belief: creators are not marketing channels; they are companies.",
+  "With over 15 years of experience spanning entertainment, media, luxury partnerships, and digital innovation, Piza has built a reputation as one of the most influential dealmakers shaping the future of modern representation. Her career has been rooted in a singular belief: creators are not just marketing channels; they are enterprises.",
   "Before launching PIZA, Stephanie served as Head of Emerging & Interactive Talent at M88, where she helped expand the firm's digital footprint while negotiating high-value partnerships that bridged creators with Fortune 500 brands, fashion houses, and global platforms.",
   "Earlier in her career, Piza co-founded UNCMMN alongside Charles King, creating one of the first female-founded management companies focused on culturally influential digital voices. The company was later strategically folded into M88, solidifying Piza's reputation as both a builder and visionary within the creator economy.",
   "Named to Variety's New Leaders List in 2021, Stephanie has consistently championed underrepresented voices throughout her career. As a proud Colombiana and one of the first prominent Latina executives to make a significant impact in digital and emerging media, she has dedicated her work to creating infrastructure, access, and ownership opportunities for historically excluded talent.",
@@ -23,18 +42,10 @@ const bioParagraphs = [
   "Today, Stephanie launched PIZA as a next-generation representation company built on ownership, infrastructure, and cultural equity. Under her leadership, PIZA represents a new era of talent representation: one where culture is leveraged not just for visibility, but for legacy, ownership, and long-term enterprise growth.",
 ]
 
-const careerHighlights = [
-  "Closed seven-figure global brand partnerships and multi-platform deals",
-  "Structured equity-forward partnerships and ownership models",
-  "Developed creator-led product and IP strategies",
-  "Built lean, high-performance management teams",
-  "Advised talent on long-term ownership, scalability, and IP retention",
-]
-
 const navItems = [
   { href: "/foundation", label: "Foundation" },
   { href: "/philosophy", label: "Philosophy" },
-  { href: "/stephanie", label: "Stephanie" },
+  { href: "/stephanie", label: "Our Team" },
 ]
 
 function allowsMotion() {
@@ -92,14 +103,13 @@ function Nav({ current }: { current?: string }) {
       className="fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.045_0_0)]/82 backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4 md:px-10">
-        <a href="/" aria-label="PIZA home" className="group inline-flex h-8 w-24 items-center justify-center overflow-hidden">
+        <a href="/" aria-label="PIZA home" className="group inline-flex h-8 items-center">
           <img
-            src="/piza/piza-inflated-transparent.png"
+            src="/piza/piza-logo.png"
             alt="PIZA"
-            width={2000}
-            height={2000}
-            className="h-full w-full scale-[3.8] object-contain transition-opacity duration-300 group-hover:opacity-80"
-            style={{ filter: "brightness(1.65) saturate(1.25)" }}
+            width={900}
+            height={328}
+            className="h-full w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
           />
         </a>
         <div className="flex items-center gap-3 sm:gap-6">
@@ -113,6 +123,12 @@ function Nav({ current }: { current?: string }) {
               {item.label}
             </a>
           ))}
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=Roster%20Request`}
+            className="hidden border border-[oklch(0.63_0.23_28)]/70 px-3 py-2 font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)] transition-colors hover:bg-[oklch(0.63_0.23_28)] hover:text-[oklch(0.98_0.012_95)] sm:inline-flex"
+          >
+            Request Roster
+          </a>
         </div>
       </div>
     </nav>
@@ -146,12 +162,11 @@ export function EntryPage() {
             className="group mt-2 inline-flex flex-col items-center gap-5 text-center"
           >
             <img
-              src="/piza/piza-inflated-transparent.png"
+              src="/piza/piza-logo.png"
               alt="PIZA"
-              width={2000}
-              height={2000}
+              width={900}
+              height={328}
               className="w-[min(68vw,440px)] object-contain drop-shadow-[0_34px_90px_rgba(130,0,0,0.52)] transition-transform duration-500 group-hover:scale-[1.025]"
-              style={{ filter: "brightness(1.72) saturate(1.24)" }}
             />
             <span className="font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)]/88 [text-shadow:0_2px_18px_rgba(0,0,0,0.92)] transition-colors group-hover:text-[oklch(0.63_0.23_28)]">
               Click PIZA logo to enter
@@ -162,9 +177,19 @@ export function EntryPage() {
             <p className="max-w-xl text-sm leading-7 text-[oklch(0.96_0.015_95)]/64 md:text-base">
               A new model focused on ownership, equity, and long-term value.
             </p>
-            <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">
-              PIZA.GLOBAL
-            </p>
+            <div className="flex items-center gap-5">
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46 transition-colors hover:text-[oklch(0.63_0.23_28)]"
+              >
+                IG @Piza.global
+              </a>
+              <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">
+                PIZA.GLOBAL
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -205,8 +230,24 @@ export function FoundationPage() {
                 &quot;<strong className="font-semibold">Representation 2.0</strong>{" - "}creators as media companies.&quot;
               </p>
             </div>
-            <a href="/philosophy" className="piza-button piza-button-primary mt-9">
-              The Philosophy
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <a href={`mailto:${CONTACT_EMAIL}?subject=Roster%20Request`} className="piza-button piza-button-primary">
+                Request Roster
+              </a>
+              <a href={`mailto:${CONTACT_EMAIL}?subject=Campaign%20Opportunity`} className="piza-button">
+                Campaign Opportunity
+              </a>
+              <a href="/philosophy" className="piza-button">
+                The Philosophy
+              </a>
+            </div>
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46 transition-colors hover:text-[oklch(0.63_0.23_28)]"
+            >
+              IG @Piza.global
             </a>
           </div>
         </div>
@@ -217,6 +258,7 @@ export function FoundationPage() {
 
 export function PhilosophyPage() {
   const sectionRef = useReveal()
+  const [openService, setOpenService] = useState<number | null>(null)
 
   return (
     <SiteShell current="Philosophy">
@@ -232,14 +274,30 @@ export function PhilosophyPage() {
           </div>
 
           <div data-reveal className="mt-10 grid gap-px border border-[oklch(0.92_0.02_92)]/12 bg-[oklch(0.92_0.02_92)]/12 md:grid-cols-5">
-            {philosophy.map((item) => (
-              <article key={item} className="min-h-[160px] bg-[oklch(0.045_0_0)] p-6 transition-colors duration-300 hover:bg-[oklch(0.09_0.02_28)] md:p-7">
-                <div className="mb-7 h-px w-10 bg-[oklch(0.63_0.23_28)]" />
-                <h2 className="font-display text-3xl font-light leading-none text-[oklch(0.98_0.012_95)] md:text-4xl">
-                  {item}
-                </h2>
-              </article>
-            ))}
+            {philosophy.map((item, index) => {
+              const open = openService === index
+              return (
+                <article key={item.title} className="bg-[oklch(0.045_0_0)]">
+                  <button
+                    type="button"
+                    onClick={() => setOpenService(open ? null : index)}
+                    aria-expanded={open}
+                    className="flex min-h-[160px] w-full flex-col items-start p-6 text-left transition-colors duration-300 hover:bg-[oklch(0.09_0.02_28)] md:p-7"
+                  >
+                    <div className="mb-7 h-px w-10 bg-[oklch(0.63_0.23_28)]" />
+                    <h2 className="font-display text-3xl font-light leading-none text-[oklch(0.98_0.012_95)] md:text-4xl">
+                      {item.title}
+                    </h2>
+                    <span className="mt-5 font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">
+                      {open ? "Close" : "About"}
+                    </span>
+                  </button>
+                  {open ? (
+                    <p className="px-6 pb-6 text-sm leading-7 text-[oklch(0.96_0.015_95)]/70 md:px-7">{item.blurb}</p>
+                  ) : null}
+                </article>
+              )
+            })}
           </div>
 
           <div data-reveal className="mt-10 grid gap-8 border-y border-[oklch(0.92_0.02_92)]/12 py-7 md:grid-cols-[.8fr_1.2fr] md:items-center">
@@ -251,9 +309,19 @@ export function PhilosophyPage() {
             </p>
           </div>
 
-          <a href="/stephanie" className="piza-button piza-button-primary mt-10">
-            Stephanie
-          </a>
+          <div className="mt-10 flex flex-wrap items-center gap-6">
+            <a href="/stephanie" className="piza-button piza-button-primary">
+              Our Team
+            </a>
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46 transition-colors hover:text-[oklch(0.63_0.23_28)]"
+            >
+              IG @Piza.global
+            </a>
+          </div>
         </div>
       </section>
     </SiteShell>
@@ -264,7 +332,7 @@ export function StephaniePage() {
   const sectionRef = useReveal()
 
   return (
-    <SiteShell current="Stephanie">
+    <SiteShell current="Our Team">
       <section ref={sectionRef} className="relative min-h-svh px-5 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.045_0_0),oklch(0.028_0_0))]" />
         <div className="relative z-10 mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[.78fr_1.22fr]">
@@ -295,17 +363,6 @@ export function StephaniePage() {
                 {paragraph}
               </p>
             ))}
-
-            <div className="border-y border-[oklch(0.92_0.02_92)]/12 py-8">
-              <p className="font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">Throughout her career</p>
-              <ul className="mt-6 grid gap-4 md:grid-cols-2">
-                {careerHighlights.map((item) => (
-                  <li key={item} className="border-l border-[oklch(0.92_0.02_92)]/14 pl-4 text-sm leading-7 text-[oklch(0.96_0.015_95)]/66">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             <footer className="flex flex-wrap items-center justify-between gap-4 pt-2">
               <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/42">PIZA.GLOBAL</p>
