@@ -1,17 +1,36 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import SmoothScroll from "@/components/smooth-scroll"
 import NoiseOverlay from "@/components/noise-overlay"
 import { gsap } from "@/lib/gsap"
 
+// Service blurbs are agency-drafted placeholders pending client-approved copy.
 const philosophy = [
-  "360 Talent Architects",
-  "Creator Ecosystems",
-  "Brand Equity",
-  "Long Term Legacy Building",
-  "Culture Positioning",
+  {
+    title: "360 Talent Architects",
+    blurb: "Full-spectrum representation: deals, brand, content, and business strategy built around each talent.",
+  },
+  {
+    title: "Creator Ecosystems",
+    blurb: "Products, platforms, and partnerships that turn an audience into a durable economy.",
+  },
+  {
+    title: "Brand Equity",
+    blurb: "Positioning and partnerships that compound the value of a name over time.",
+  },
+  {
+    title: "Long Term Legacy Building",
+    blurb: "Ownership-first structures designed for decades, not campaign cycles.",
+  },
+  {
+    title: "Culture Positioning",
+    blurb: "Placing talent at the center of the cultural moments that matter.",
+  },
 ]
+
+const CONTACT_EMAIL = "info@piza.global"
+const IG_URL = "https://instagram.com/Piza.global"
 
 const bioParagraphs = [
   "Stephanie Piza is one of the defining forces behind the evolution of the creator economy, recognized for transforming digital talent into enterprise-level brands, cultural powerhouses, and long-term businesses.",
@@ -84,14 +103,13 @@ function Nav({ current }: { current?: string }) {
       className="fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.92_0.02_92)]/10 bg-[oklch(0.045_0_0)]/82 backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4 md:px-10">
-        <a href="/" aria-label="PIZA home" className="group inline-flex h-8 w-24 items-center justify-center overflow-hidden">
+        <a href="/" aria-label="PIZA home" className="group inline-flex h-8 items-center">
           <img
-            src="/piza/piza-inflated-transparent.png"
+            src="/piza/piza-logo.png"
             alt="PIZA"
-            width={2000}
-            height={2000}
-            className="h-full w-full scale-[3.8] object-contain transition-opacity duration-300 group-hover:opacity-80"
-            style={{ filter: "brightness(1.22) saturate(1.12)" }}
+            width={900}
+            height={328}
+            className="h-full w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
           />
         </a>
         <div className="flex items-center gap-3 sm:gap-6">
@@ -105,6 +123,12 @@ function Nav({ current }: { current?: string }) {
               {item.label}
             </a>
           ))}
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=Roster%20Request`}
+            className="hidden border border-[oklch(0.63_0.23_28)]/70 px-3 py-2 font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)] transition-colors hover:bg-[oklch(0.63_0.23_28)] hover:text-[oklch(0.98_0.012_95)] sm:inline-flex"
+          >
+            Request Roster
+          </a>
         </div>
       </div>
     </nav>
@@ -138,12 +162,11 @@ export function EntryPage() {
             className="group mt-2 inline-flex flex-col items-center gap-5 text-center"
           >
             <img
-              src="/piza/piza-inflated-transparent.png"
+              src="/piza/piza-logo.png"
               alt="PIZA"
-              width={2000}
-              height={2000}
+              width={900}
+              height={328}
               className="w-[min(68vw,440px)] object-contain drop-shadow-[0_34px_90px_rgba(130,0,0,0.52)] transition-transform duration-500 group-hover:scale-[1.025]"
-              style={{ filter: "brightness(1.28) saturate(1.12)" }}
             />
             <span className="font-mono text-[10px] uppercase text-[oklch(0.98_0.012_95)]/88 [text-shadow:0_2px_18px_rgba(0,0,0,0.92)] transition-colors group-hover:text-[oklch(0.63_0.23_28)]">
               Click PIZA logo to enter
@@ -154,9 +177,19 @@ export function EntryPage() {
             <p className="max-w-xl text-sm leading-7 text-[oklch(0.96_0.015_95)]/64 md:text-base">
               A new model focused on ownership, equity, and long-term value.
             </p>
-            <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">
-              PIZA.GLOBAL
-            </p>
+            <div className="flex items-center gap-5">
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46 transition-colors hover:text-[oklch(0.63_0.23_28)]"
+              >
+                IG @Piza.global
+              </a>
+              <p className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46">
+                PIZA.GLOBAL
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -197,8 +230,24 @@ export function FoundationPage() {
                 &quot;<strong className="font-semibold">Representation 2.0</strong>{" - "}creators as media companies.&quot;
               </p>
             </div>
-            <a href="/philosophy" className="piza-button piza-button-primary mt-9">
-              The Philosophy
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <a href={`mailto:${CONTACT_EMAIL}?subject=Roster%20Request`} className="piza-button piza-button-primary">
+                Request Roster
+              </a>
+              <a href={`mailto:${CONTACT_EMAIL}?subject=Campaign%20Opportunity`} className="piza-button">
+                Campaign Opportunity
+              </a>
+              <a href="/philosophy" className="piza-button">
+                The Philosophy
+              </a>
+            </div>
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46 transition-colors hover:text-[oklch(0.63_0.23_28)]"
+            >
+              IG @Piza.global
             </a>
           </div>
         </div>
@@ -209,6 +258,7 @@ export function FoundationPage() {
 
 export function PhilosophyPage() {
   const sectionRef = useReveal()
+  const [openService, setOpenService] = useState<number | null>(null)
 
   return (
     <SiteShell current="Philosophy">
@@ -224,14 +274,30 @@ export function PhilosophyPage() {
           </div>
 
           <div data-reveal className="mt-10 grid gap-px border border-[oklch(0.92_0.02_92)]/12 bg-[oklch(0.92_0.02_92)]/12 md:grid-cols-5">
-            {philosophy.map((item) => (
-              <article key={item} className="min-h-[160px] bg-[oklch(0.045_0_0)] p-6 transition-colors duration-300 hover:bg-[oklch(0.09_0.02_28)] md:p-7">
-                <div className="mb-7 h-px w-10 bg-[oklch(0.63_0.23_28)]" />
-                <h2 className="font-display text-3xl font-light leading-none text-[oklch(0.98_0.012_95)] md:text-4xl">
-                  {item}
-                </h2>
-              </article>
-            ))}
+            {philosophy.map((item, index) => {
+              const open = openService === index
+              return (
+                <article key={item.title} className="bg-[oklch(0.045_0_0)]">
+                  <button
+                    type="button"
+                    onClick={() => setOpenService(open ? null : index)}
+                    aria-expanded={open}
+                    className="flex min-h-[160px] w-full flex-col items-start p-6 text-left transition-colors duration-300 hover:bg-[oklch(0.09_0.02_28)] md:p-7"
+                  >
+                    <div className="mb-7 h-px w-10 bg-[oklch(0.63_0.23_28)]" />
+                    <h2 className="font-display text-3xl font-light leading-none text-[oklch(0.98_0.012_95)] md:text-4xl">
+                      {item.title}
+                    </h2>
+                    <span className="mt-5 font-mono text-[10px] uppercase text-[oklch(0.63_0.23_28)]">
+                      {open ? "Close" : "About"}
+                    </span>
+                  </button>
+                  {open ? (
+                    <p className="px-6 pb-6 text-sm leading-7 text-[oklch(0.96_0.015_95)]/70 md:px-7">{item.blurb}</p>
+                  ) : null}
+                </article>
+              )
+            })}
           </div>
 
           <div data-reveal className="mt-10 grid gap-8 border-y border-[oklch(0.92_0.02_92)]/12 py-7 md:grid-cols-[.8fr_1.2fr] md:items-center">
@@ -243,9 +309,19 @@ export function PhilosophyPage() {
             </p>
           </div>
 
-          <a href="/stephanie" className="piza-button piza-button-primary mt-10">
-            Our Team
-          </a>
+          <div className="mt-10 flex flex-wrap items-center gap-6">
+            <a href="/stephanie" className="piza-button piza-button-primary">
+              Our Team
+            </a>
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[10px] uppercase text-[oklch(0.96_0.015_95)]/46 transition-colors hover:text-[oklch(0.63_0.23_28)]"
+            >
+              IG @Piza.global
+            </a>
+          </div>
         </div>
       </section>
     </SiteShell>
